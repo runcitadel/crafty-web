@@ -184,46 +184,22 @@ class Minecraft_Server():
         logger.info("Launching Minecraft server %s with command %s", self.name, self.server_command)
 
         if os.name == "nt":
-            logger.info("Windows Detected - launching cmd")
+            logger.info("Windows Detected")
             self.server_command = self.server_command.replace('\\', '/')
-            logging.info("Opening CMD prompt")
-            self.process = pexpect.popen_spawn.PopenSpawn('cmd \r\n', timeout=None, encoding=None)
-
-            drive_letter = self.server_path[:1]
-
-            if drive_letter.lower() != "c":
-                logger.info("Server is not on the C drive, changing drive letter to {}:".format(drive_letter))
-                self.process.send("{}:\r\n".format(drive_letter))
-
-            logging.info("changing directories to {}".format(self.server_path.replace('\\', '/')))
-            self.process.send('cd {} \r\n'.format(self.server_path.replace('\\', '/')))
-            logging.info("Sending command {} to CMD".format(self.server_command))
-            self.process.send(self.server_command + "\r\n")
-
-            self.is_crashed = False
         else:
-            logger.info("Linux Detected - launching Bash")
-            self.process = pexpect.popen_spawn.PopenSpawn('/bin/bash \n', timeout=None, encoding=None)
-
-            logger.info("Changing directory to %s", self.server_path)
-            self.process.send('cd {} \n'.format(self.server_path))
-
-            logger.info("Sending server start command: {} to shell".format(self.server_command))
-            self.process.send(self.server_command + '\n')
-            self.is_crashed = False
+            logger.info("Linux Detected")
+        logger.info("Starting server in {p} with command: {c}".format(p=self.server_path, c=self.server_command))
+        self.process = pexpect.popen_spawn.PopenSpawn(self.server_command, cwd=self.server_path, timeout=None, encoding=None)
+        self.is_crashed = False
 
         ts = time.time()
         self.start_time = str(datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S'))
 
         if psutil.pid_exists(self.process.pid):
-            parent = psutil.Process(self.process.pid)
-            time.sleep(.5)
-            children = parent.children(recursive=True)
-            for c in children:
-                self.PID = c.pid
-                logger.info("Minecraft server %s running with PID %s", self.name, self.PID)
-                webhookmgr.run_event_webhooks("mc_start", webhookmgr.payload_formatter(200, {}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": not self.PID is None , "PID": self.PID, "restart_count": self.restart_count}}, {"info": "Minecraft Server has started"}))
-                self.is_crashed = False
+            self.PID = self.process.pid
+            logger.info("Minecraft server %s running with PID %s", self.name, self.PID)
+            webhookmgr.run_event_webhooks("mc_start", webhookmgr.payload_formatter(200, {}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": not self.PID is None , "PID": self.PID, "restart_count": self.restart_count}}, {"info": "Minecraft Server has started"}))
+            self.is_crashed = False
         else:
             webhookmgr.run_event_webhooks("mc_start", webhookmgr.payload_formatter(500, {"error": "SER_DIED"}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": not self.PID is None , "PID": self.PID, "restart_count": self.restart_count}}, {"info": "Minecraft Server died right after startup! Config issue?"}))
             logger.warning("Server PID %s died right after starting - is this a server config issue?", self.PID)
