@@ -31,10 +31,10 @@
 
     <div class="row">
 
-        <div class="col-md-6 col-sm-12">
-            <div class="card card-secondary card-outline">
+        <div class="col-md-7 col-sm-12">
+            <div class="card card-secondary card-outline" style="overflow-x: scroll;">
                 <div class="card-header">
-                  <h3 class="card-title">
+                  <h3 class="card-title" style="word-break: break-all;">
                       {{ _('Current Directory:') }} {{ data['pwd'] }}
                   </h3>
                 </div>
@@ -116,18 +116,18 @@
         </div>
 
 
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-5 col-sm-12">
 
             <div class="card card-secondary card-outline">
             <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-server" aria-hidden="true"></i> {{ _('Upload File to Dir:') }} {{ data['pwd'] }}</h3>
+                <h3 class="card-title"><i class="fas fa-server" aria-hidden="true"></i> <span style="word-break: break-all;">{{ _('Upload File to Dir:') }} {{ data['pwd'] }}</span></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <div class="row">
                     <div class="col-6 ">
-                        <a class="btn btn-info text-white" id="new_folder" onclick="new_file_folder('folder')">New Folder</a>
-                        <a class="btn btn-info text-white" id="new_file" onclick="new_file_folder('file')">New File</a>
+                        <a class="btn btn-info text-white" id="new_folder" onclick="new_file_folder('folder')" style="margin-top: .25em;">New Folder</a>
+                        <a class="btn btn-info text-white" id="new_file" onclick="new_file_folder('file')" style="margin-top: .25em;">New File</a>
                     </div>
 
                     <div class="col-6 ">
