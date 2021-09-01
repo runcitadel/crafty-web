@@ -375,6 +375,9 @@ class multi_serve():
         if cpu_freq is None:
             cpu_freq = psutil._common.scpufreq(current=0, min=0, max=0)
 
+        query = Crafty_settings.select(Crafty_settings.disk_usage_root)
+        disk_usage_root = query[0].disk_usage_root
+
         insert_id = Host_Stats.insert({
             Host_Stats.boot_time: str(boot_time),
             Host_Stats.cpu_usage: round(psutil.cpu_percent(interval=0.5) / psutil.cpu_count(), 2),
@@ -384,9 +387,9 @@ class multi_serve():
             Host_Stats.mem_percent: psutil.virtual_memory()[2],
             Host_Stats.mem_usage: helper.human_readable_file_size(psutil.virtual_memory()[3]),
             Host_Stats.mem_total: helper.human_readable_file_size(psutil.virtual_memory()[0]),
-            Host_Stats.disk_percent: psutil.disk_usage('/')[3],
-            Host_Stats.disk_usage: helper.human_readable_file_size(psutil.disk_usage('/')[1]),
-            Host_Stats.disk_total: helper.human_readable_file_size(psutil.disk_usage('/')[0]),
+            Host_Stats.disk_percent: psutil.disk_usage(disk_usage_root)[3],
+            Host_Stats.disk_usage: helper.human_readable_file_size(psutil.disk_usage(disk_usage_root)[1]),
+            Host_Stats.disk_total: helper.human_readable_file_size(psutil.disk_usage(disk_usage_root)[0]),
         }).execute()
 
         # make sure we only have 1 record/row
