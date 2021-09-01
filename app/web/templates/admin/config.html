@@ -124,6 +124,8 @@
                                                   Currently: Nederlands 
                                                 {% elif data['crafty_settings']['language'] == "ro_MO" %}
                                                   Currently: Română
+												{% elif data['crafty_settings']['language'] == "de_DE" %}
+                                                  Currently: Deutsch
                                                 {% end %}
                                             </div>
                                             <div class="form-group">
@@ -190,6 +192,17 @@
                                                                 />
                                                     <label>
                                                         Română
+                                                    </label>
+                                                </div>
+												
+												<div class="form-check">
+                                                        <input type="radio"
+                                                            name="language"
+                                                            value="de_DE"
+                                                                {% if data['crafty_settings']['language'] == "de_DE" %} checked {% end %}
+                                                                />
+                                                    <label>
+                                                        Deutsch
                                                     </label>
                                                 </div>
 
