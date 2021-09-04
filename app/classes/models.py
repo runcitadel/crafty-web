@@ -151,7 +151,6 @@ class Crafty_settings(BaseModel):
     history_interval = IntegerField()
     history_max_age = IntegerField()
     language = CharField(default='en_EN')
-    disk_usage_root = CharField(default='/')
 
     class Meta:
         table_name = 'crafty_settings'

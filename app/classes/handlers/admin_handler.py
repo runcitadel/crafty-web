@@ -560,14 +560,12 @@ class AdminHandler(BaseHandler):
                 interval = bleach.clean(self.get_argument('historical_interval'))
                 max_age = bleach.clean(self.get_argument('history_max_age'))
                 lang = bleach.clean(self.get_argument('language'))
-                disk_usage_root = bleach.clean(self.get_argument('disk_usage_root'))
                 web_port = int(float(self.get_argument('port_number')))
 
                 q = Crafty_settings.update({
                     Crafty_settings.history_interval: interval,
                     Crafty_settings.history_max_age: max_age,
                     Crafty_settings.language: lang,
-                    Crafty_settings.disk_usage_root: disk_usage_root,
                 }).where(Crafty_settings.id == 1).execute()
 
                 q = Webserver.update({

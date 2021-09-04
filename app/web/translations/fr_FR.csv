@@ -100,7 +100,7 @@ FTP Server Control: Server is currently, Contrôle FTP du serveur : Le serveur e
 Getting Version Data, Obtenir les données de version
 Host CPU, CPU Machine
 Host RAM, RAM Machine
-Host Disk, Utilisation Disque Machine
+Host Root Disk, Utilisation Disque Machine
 HOST TOTAL CPU USAGE, UTILISATION TOTALE CPU MACHINE
 HOST TOTAL RAM USAGE, UTILISATION TOTALE RAM MACHINE
 HOST TOTAL DISK USAGE, UTILISATION TOTALE DISQUE MACHINE
