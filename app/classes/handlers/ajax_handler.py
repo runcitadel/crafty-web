@@ -279,7 +279,7 @@ class AjaxHandler(BaseHandler):
                 helper.del_file(server_backup_file)
 
         elif page == 'del_schedule':
-            if not user_data['schedule']:
+            if not user_data['schedules']:
                 logger.warning("User: {} with Role: {} Attempted Access to: {} and was denied".format(
                     user_data['username'], user_data['role_name'], "Delete Schedule"))
                 self.redirect('/admin/unauthorized')
