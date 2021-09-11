@@ -7,7 +7,7 @@ services:
     # network_mode: host
     ports:
       - "8000:8000"
-      - "25500-25600:25500-25560"
+      - "25500-25600:25500-25600"
     volumes: 
       - ./docker/minecraft_servers:/minecraft_servers
       - ./docker/db:/crafty_db
