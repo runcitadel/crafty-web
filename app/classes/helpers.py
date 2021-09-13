@@ -505,13 +505,17 @@ class helpers:
             return False
 
     def get_official_server_jar(self, dest):
+        # Use the official Minecraft launcher manifest to get the newest game version info
         r = requests.get("https://launchermeta.mojang.com/mc/game/version_manifest.json", timeout=5)
         manifest = json.loads(r.text)
         version_manifest = manifest['versions'][0].get('url')
 
+        # Use the newest game info to get the new download link for the server.jar
         r = requests.get(version_manifest, timeout=5)
         v_manifest = json.loads(r.text)
         new_jar = v_manifest['downloads'].get('server').get('url')
+
+        # Use the already made download_file to get the new server jar
         self.download_file(new_jar, dest)
 
     def download_file(self, url, dest):

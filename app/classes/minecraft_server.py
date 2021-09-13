@@ -711,10 +711,11 @@ class Minecraft_Server():
         logger.info("Backing up Current Jar")
         helper.copy_file(current_jar, backup_jar_name)
 
+        # Checks to see if jar_url string is "official server"
         if self.settings.jar_url == 'official server':
             download_complete = helper.get_official_server_jar(current_jar)
         else:
-            # download the new server jar file
+            # download the new server jar file if it's not the official jar
             download_complete = helper.download_file(self.settings.jar_url, current_jar)
 
         if download_complete:
