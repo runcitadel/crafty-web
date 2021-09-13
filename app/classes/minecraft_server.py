@@ -175,7 +175,6 @@ class Minecraft_Server():
             logger.critical("Minecraft server Java path does not exist...")
             return False
 
-
         if not helper.check_writeable(self.server_path):
             console.warning("Unable to write/access {}".format(self.server_path))
             logger.critical("Unable to write/access {}".format(self.server_path))
@@ -712,8 +711,11 @@ class Minecraft_Server():
         logger.info("Backing up Current Jar")
         helper.copy_file(current_jar, backup_jar_name)
 
-        # download the new server jar file
-        download_complete = helper.download_file(self.settings.jar_url, current_jar)
+        if self.settings.jar_url == 'official server':
+            download_complete = helper.get_official_server_jar(current_jar)
+        else:
+            # download the new server jar file
+            download_complete = helper.download_file(self.settings.jar_url, current_jar)
 
         if download_complete:
             logger.info("Server Jar Download Complete")

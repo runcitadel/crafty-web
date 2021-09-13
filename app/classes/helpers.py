@@ -504,6 +504,16 @@ class helpers:
             logger.info("Unable to copy {}, file not found".format(source))
             return False
 
+    def get_official_server_jar(self, dest):
+        r = requests.get("https://launchermeta.mojang.com/mc/game/version_manifest.json", timeout=5)
+        manifest = json.loads(r.text)
+        version_manifest = manifest['versions'][0].get('url')
+
+        r = requests.get(version_manifest, timeout=5)
+        v_manifest = json.loads(r.text)
+        new_jar = v_manifest['downloads'].get('server').get('url')
+        self.download_file(new_jar, dest)
+
     def download_file(self, url, dest):
         r = requests.get(url, timeout=5, allow_redirects=True)
         if r.status_code != 200:
