@@ -1,8 +1,8 @@
 # Crafty Controller
 > Python based Server Manager / Web Portal for your Minecraft Server
 
-# Important: Latest Changes
-The project is now hosted on both GitLab and GitHub. GitLab has been setup to push changes to the GitHub project, signalling that we would like to move away from GitLab in the near future.
+# Latest Changes
+The project is now hosted on both GitLab and GitHub. GitLab has been setup to push changes to the GitHub project.
 
 ## What is Crafty?
 Crafty is a Minecraft Server Wrapper / Controller / Launcher. The purpose 
