@@ -669,6 +669,10 @@ class Minecraft_Server():
 
         self.reload_settings()
 
+        if self.settings.jar_url == '':
+            console.info("No update URL found for JAR file in settings.")
+            return 0
+
         self.updating = True
 
         logger.info("Starting Jar Update Process")
@@ -712,7 +716,7 @@ class Minecraft_Server():
         helper.copy_file(current_jar, backup_jar_name)
 
         # Checks to see if jar_url string is "official server"
-        if self.settings.jar_url == 'official server':
+        if self.settings.jar_url.lower() == 'official':
             download_complete = helper.get_official_server_jar(current_jar)
         else:
             # download the new server jar file if it's not the official jar
