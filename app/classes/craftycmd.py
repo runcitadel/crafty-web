@@ -7,7 +7,7 @@ import logging
 
 from app.classes.console import console
 from app.classes.helpers import helpers
-from app.classes.models import Remote, MC_settings, Webserver, model_to_dict, Users
+from app.classes.models import Remote, MC_settings, Webserver, model_to_dict, Users, peewee
 from app.classes.multiserv import multi
 
 helper = helpers()
@@ -470,3 +470,12 @@ class MainPrompt(cmd.Cmd):
         else:
             console.warning("Unable to update server jar, please complete setup in the web GUI first")
 
+    # Begin migration code
+    def do_migrate(self, line):
+        if helper.is_setup_complete():
+            peewee.migrate_to_json()
+
+    def help_migrate(self):
+        console.help("Saves all database tables to JSON files for easier migration")
+        console.help("Example: migrate")
+        console.help("All JSON files can be found in the 'migrate' folder")
