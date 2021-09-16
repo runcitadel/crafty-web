@@ -473,7 +473,7 @@ class MainPrompt(cmd.Cmd):
     # Begin migration code
     def do_migrate(self, line):
         if helper.is_setup_complete():
-            console.info(peewee.migrate_to_json())
+            peewee.migrate_to_json()
 
     def help_migrate(self):
         console.help("Saves all database tables to JSON files for easier migration")

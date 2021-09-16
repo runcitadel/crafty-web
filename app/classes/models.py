@@ -335,6 +335,7 @@ class sqlhelper():
             # Loop through all the tables in the database
             for table in table_names:
                 console.info(f"Migrating {table}...")
+                dictionaries = []
 
                 # Select everything from that table
                 query = database.execute_sql(f"SELECT * FROM {table}")
@@ -348,10 +349,18 @@ class sqlhelper():
                     for col in row:
                         temp_list.append(col)
                     new_dict = {k: v for k, v in zip(names, temp_list)}
+                    dictionaries.append(new_dict)
 
                 # Save the newly made Dictionary to a JSON file named after the table
                 with open(f'migrate/{table}.json', 'w+') as f:
-                    json.dump(new_dict, f, indent=4)
+                    if dictionaries.__len__() > 1:
+                        json.dump(dictionaries, f, indent=4)
+                    else:
+                        try:
+                            json.dump(dictionaries[0], f, indent=4)
+                        except:
+                            # Probably an empty table, just make it an empty dictionary
+                            json.dump({}, f, indent=4)
 
                 # Rinse and repeat
                 new_dict.clear()
