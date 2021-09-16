@@ -5,6 +5,7 @@ from peewee import DateTimeField, CharField, FloatField, Model, IntegerField, Bo
 from playhouse.shortcuts import model_to_dict, dict_to_model
 from playhouse.migrate import *
 from app.classes.helpers import helper
+from app.classes.console import console
 import logging
 
 # SQLite database using WAL journal mode and 10MB cache.
@@ -316,6 +317,45 @@ class sqlhelper():
             Crafty_settings.update({
                 Crafty_settings.language: "en_EN"
             }).where(Crafty_settings.id == 1).execute()
+
+    # This method will allow easier 3.x to 4.x migration for the Databases
+    def migrate_to_json(self):
+
+        # Start off checking if a migrate directory exists
+        if not os.path.exists(os.path.join(os.getcwd(), 'migrate')):
+            os.mkdir(os.path.join(os.getcwd(), 'migrate'))
+
+        # Now we will begin
+        with database:
+            # Get all the table names in the sql database
+            cursor = database.cursor()
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+            table_names = [table[0] for table in cursor.fetchall()]
+
+            # Loop through all the tables in the database
+            for table in table_names:
+                console.info(f"Migrating {table}...")
+
+                # Select everything from that table
+                query = database.execute_sql(f"SELECT * FROM {table}")
+
+                # Get all the column names
+                names = [description[0] for description in query.description]
+
+                # Iterate through all the rows and save the col names matched with it's value at the end
+                for row in query:
+                    temp_list = []
+                    for col in row:
+                        temp_list.append(col)
+                    new_dict = {k: v for k, v in zip(names, temp_list)}
+
+                # Save the newly made Dictionary to a JSON file named after the table
+                with open(f'migrate/{table}.json', 'w+') as f:
+                    json.dump(new_dict, f, indent=4)
+
+                # Rinse and repeat
+                new_dict.clear()
+
 
 def get_perms_for_user(user):
     user_data = {}
