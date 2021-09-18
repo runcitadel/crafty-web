@@ -417,11 +417,13 @@ class helpers:
             if os.path.isdir(os.path.join(root_path, f)):
                 structure.append({'type': 'dir', 'name': "{}/{}".format(root_path, f)})
             else:
+                path, ext = os.path.splitext(f'{root_path}{f}')
                 size = self.human_readable_file_size(os.path.getsize(os.path.join(root_path, f)))
                 structure.append({
                     'type': 'file',
                     'name': "{}/{}".format(root_path, f),
-                    'size': "{}".format(size)
+                    'size': "{}".format(size),
+                    'ext': f"{ext}"
                 })
 
         return sorted(structure, key=lambda i: i['name'])
