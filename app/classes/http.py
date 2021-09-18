@@ -76,7 +76,7 @@ class webserver():
         }
         tornado.log.access_log.info(json.dumps(info, indent=4))
 
-    def run_tornado(self, silent=False):
+    def run_tornado(self, silent=False, port=8000):
 
         # First, patch asyncio if needed
         self._asyncio_patch()
@@ -89,7 +89,10 @@ class webserver():
         crafty_settings = Crafty_settings.get()
         lang = crafty_settings.language
 
-        port_number = websettings.port_number
+        if port != 8000:
+            port_number = port
+        else:
+            port_number = websettings.port_number
         web_root = helper.get_web_root_path()
 
         logger.info("Starting Tornado HTTPS Server on port {}".format(port_number))
@@ -168,8 +171,8 @@ class webserver():
         self.ioloop = tornado.ioloop.IOLoop.instance()
         self.ioloop.start()
 
-    def start_web_server(self, silent=False):
-        thread = threading.Thread(target=self.run_tornado, args=(silent, ), daemon=True, name='tornado_thread')
+    def start_web_server(self, silent=False, port=8000):
+        thread = threading.Thread(target=self.run_tornado, args=(silent, port, ), daemon=True, name='tornado_thread')
         thread.start()
 
     def stop_web_server(self):

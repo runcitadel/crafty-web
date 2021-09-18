@@ -180,6 +180,10 @@ if __name__ == '__main__':
                         help="Specify a config file to tell Crafty where to store it's database, version, etc."
                         )
 
+    parser.add_argument('-p', '--port',
+                        action='store_true',
+                        help="Allows user to change the default web port.")
+
     args = parser.parse_args()
 
     # sets up our logger
@@ -229,6 +233,48 @@ if __name__ == '__main__':
     if args.daemonize:
         daemon_mode = args.daemonize
 
+    # Check for port flag activation
+    if args.port:
+
+        # First let us check if the user already has a custom port
+        # If they do we are going to use it
+        config_file = os.path.join(os.path.curdir, "app", 'config', 'port.json')
+        if helper.check_file_exists(config_file):
+            with open(config_file) as f:
+                port_number = json.load(f)
+                port_number = port_number['port']
+        else:
+
+            # Warn our user that this is an advanced feature
+            console.critical('** WARNING **')
+            console.critical('Only change this setting if you know what you are doing')
+            console.help('Value must be above 1024')
+
+            # Run a loop to get a new port number
+            while True:
+                port_number = input('Custom Port: ')
+
+                # Ensure the user actually inputted a number
+                try:
+                    int(port_number)
+                except ValueError:
+                    console.help('Please enter a number.')
+                    continue
+
+                # Check if the port number is above 1024
+                # Do not change to 1024 because it will accept 1024, not sure why
+                if int(port_number) < 1025:
+                    console.help('Please enter a value above 1024.')
+                    continue
+                else:
+                    # We got a number above 1024 lets use it
+                    break
+
+            # Save the users new custom port
+            new_port = {'port': port_number}
+            with open(config_file, 'w+') as f:
+                json.dump(new_port, f, indent=4)
+
     # do we have access to write to our folder?
     if not helper.check_writeable(os.curdir):
         logger.info("***** Crafty Stopped ***** \n")
@@ -273,9 +319,14 @@ if __name__ == '__main__':
     scheduler.start()
 
     # startup Tornado if we aren't killing all craftys
-    tornado_srv.start_web_server(True)
-    websettings = Webserver.get()
-    port_number = websettings.port_number
+
+    # Check if port number is set, if so use it
+    try:
+        tornado_srv.start_web_server(True, port_number)
+    except:
+        tornado_srv.start_web_server(True)
+        websettings = Webserver.get()
+        port_number = websettings.port_number
 
     console.info("Starting Tornado HTTPS Server https://{}:{}".format(helper.get_local_ip(), port_number))
     if fresh_install:
