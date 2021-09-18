@@ -682,7 +682,7 @@ class AdminHandler(BaseHandler):
                 context['parent'] = path.parent
                 context['parent'] = str(context['parent']).replace("\\", '/')
 
-            context['ext_list'] = [".txt", ".yml", ".ties", ".json", '.conf', '.cfg', '.toml']
+            context['ext_list'] = [".txt", ".yml", ".ties", ".json", '.conf', '.cfg', '.toml', '.properties']
 
 
             self.render(
@@ -870,7 +870,7 @@ class AdminHandler(BaseHandler):
                 context['parent'] = path.parent
                 context['parent'] = str(context['parent']).replace("\\", '/')
 
-            context['ext_list'] = [".txt", ".yml", "ties", "json", '.conf', '.cfg', 'toml', '.properties']
+            context['ext_list'] = [".txt", ".yml", ".ties", ".json", '.conf', '.cfg', '.toml', '.properties']
 
             self.render(
                 template,
