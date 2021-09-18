@@ -35,3 +35,4 @@ app/config/new_install.temp
 # kevdagoat custom patterns :)
 .vscode/*
 custom_scripts/
+servers/*
