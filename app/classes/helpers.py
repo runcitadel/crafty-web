@@ -508,7 +508,13 @@ class helpers:
         # Use the official Minecraft launcher manifest to get the newest game version info
         r = requests.get("https://launchermeta.mojang.com/mc/game/version_manifest.json", timeout=5)
         manifest = json.loads(r.text)
-        version_manifest = manifest['versions'][0].get('url')
+
+        # Created a check to ensure Snapshot versions were not being downloaded
+        # Future option to add possibly?
+        for version in manifest['versions']:
+            if version['type'] == 'release':
+                version_manifest = version['url']
+                break
 
         # Use the newest game info to get the new download link for the server.jar
         r = requests.get(version_manifest, timeout=5)
