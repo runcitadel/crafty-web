@@ -211,7 +211,7 @@ class sqlhelper():
                                     Command_Webhooks]
                                    )
 
-    def default_settings(self, admin_pass, admin_token):
+    def default_settings(self, admin_pass, admin_token, port_number=8000):
 
         from app.classes.helpers import helper
 
@@ -281,7 +281,7 @@ class sqlhelper():
         Roles.insert_many(perms_insert).execute()
 
         Webserver.insert({
-            Webserver.port_number: 8000,
+            Webserver.port_number: port_number,
         }).execute()
 
         Ftp_Srv.insert({

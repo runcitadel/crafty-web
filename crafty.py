@@ -181,8 +181,7 @@ if __name__ == '__main__':
                         )
 
     parser.add_argument('-p', '--port',
-                        action='store_true',
-                        help="Allows user to change the default web port.")
+                        help="Allows user to change the default web port for the current session.")
 
     args = parser.parse_args()
 
@@ -236,44 +235,25 @@ if __name__ == '__main__':
     # Check for port flag activation
     if args.port:
 
-        # First let us check if the user already has a custom port
-        # If they do we are going to use it
-        config_file = os.path.join(os.path.curdir, "app", 'config', 'port.json')
-        if helper.check_file_exists(config_file):
-            with open(config_file) as f:
-                port_number = json.load(f)
-                port_number = port_number['port']
-        else:
+        # Make sure the user put in an actual number
+        # Make sure that number is above 1024 and below 65566
+        try:
+            port = int(args.port)
+            if 1024 >= port or port > 65565:
+                console.critical('Please input a number above 1024 but below or equal to 65565 as the port desired.')
+                sys.exit()
+        except Exception as e:
+            console.critical('Please input a number above 1024 as the port desired.')
+            sys.exit()
 
-            # Warn our user that this is an advanced feature
-            console.critical('** WARNING **')
-            console.critical('Only change this setting if you know what you are doing')
-            console.help('Value must be above 1024')
+        # Issue warning to user letting them know this could break things if they do not know what they are doing
+        console.critical('** WARNING - Only use this argument if you know what you are doing')
+        response = input('Do you wish to proceed? [Y/n] > ')
 
-            # Run a loop to get a new port number
-            while True:
-                port_number = input('Custom Port: ')
+        if response.lower() in ['n', 'no']:
+            sys.exit()
 
-                # Ensure the user actually inputted a number
-                try:
-                    int(port_number)
-                except ValueError:
-                    console.help('Please enter a number.')
-                    continue
-
-                # Check if the port number is above 1024
-                # Do not change to 1024 because it will accept 1024, not sure why
-                if int(port_number) < 1025:
-                    console.help('Please enter a value above 1024.')
-                    continue
-                else:
-                    # We got a number above 1024 lets use it
-                    break
-
-            # Save the users new custom port
-            new_port = {'port': port_number}
-            with open(config_file, 'w+') as f:
-                json.dump(new_port, f, indent=4)
+        # Now that we have checked the args.port variable and it passes, just call int(args.port) to use it
 
     # do we have access to write to our folder?
     if not helper.check_writeable(os.curdir):
@@ -297,7 +277,35 @@ if __name__ == '__main__':
         admin_pass = helper.random_string_generator()
         admin_token = secrets.token_urlsafe(32)
 
-        peewee.default_settings(admin_pass, admin_token)
+        # Ask user if they wish to change their default web port
+        console.warning('You can change your default webport now [Advanced Users Only]')
+        console.warning('Do you wish to change it? [Y/n]')
+        while True:
+            response = input('> ')
+            if response == '':
+                console.warning('Please input a response.')
+                continue
+            if response not in ['y', 'n']:
+                console.warning('Please input a response. "y" or "n"')
+                continue
+            break
+        if response.lower() == 'n':
+            peewee.default_settings(admin_pass, admin_token)
+        else:
+            while True:
+                port = input('Please input a number above 1024 but below or equal to 65565 as the port desired. > ')
+                try:
+                    port = int(port)
+                    if 1024 >= port or port > 65565:
+                        console.critical(
+                            'Please input a number above 1024 but below or equal to 65565 as the port desired.')
+                        continue
+                except Exception as e:
+                    console.critical(
+                        'Please input a number above 1024 but below or equal to 65565 as the port desired.')
+                    continue
+                break
+            peewee.default_settings(admin_pass, admin_token, int(port))
 
     else:
         peewee.do_database_migrations()
@@ -320,10 +328,11 @@ if __name__ == '__main__':
 
     # startup Tornado if we aren't killing all craftys
 
-    # Check if port number is set, if so use it
-    try:
-        tornado_srv.start_web_server(True, port_number)
-    except:
+    # Check if the port argument was used, if so use it for this session
+    if args.port:
+        tornado_srv.start_web_server(True, int(args.port))
+        port_number = int(args.port)
+    else:
         tornado_srv.start_web_server(True)
         websettings = Webserver.get()
         port_number = websettings.port_number
