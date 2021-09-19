@@ -89,7 +89,7 @@ class webserver():
         crafty_settings = Crafty_settings.get()
         lang = crafty_settings.language
 
-        if port != 8000:
+        if port != websettings.port_number:
             port_number = port
         else:
             port_number = websettings.port_number
