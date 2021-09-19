@@ -76,7 +76,7 @@ class webserver():
         }
         tornado.log.access_log.info(json.dumps(info, indent=4))
 
-    def run_tornado(self, silent=False, port=8000):
+    def run_tornado(self, silent=False, port=0):
 
         # First, patch asyncio if needed
         self._asyncio_patch()
@@ -89,9 +89,12 @@ class webserver():
         crafty_settings = Crafty_settings.get()
         lang = crafty_settings.language
 
-        if port != websettings.port_number:
+        # If the port has been changed from the default 0
+        # Let us use the port the user defined
+        if port != 0:
             port_number = port
         else:
+            # The port was default 0 so pull the port saved in the Database
             port_number = websettings.port_number
         web_root = helper.get_web_root_path()
 
