@@ -174,7 +174,7 @@ class webserver():
         self.ioloop = tornado.ioloop.IOLoop.instance()
         self.ioloop.start()
 
-    def start_web_server(self, silent=False, port=8000):
+    def start_web_server(self, silent=False, port=0):
         thread = threading.Thread(target=self.run_tornado, args=(silent, port, ), daemon=True, name='tornado_thread')
         thread.start()
 
