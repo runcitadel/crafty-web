@@ -180,6 +180,9 @@ if __name__ == '__main__':
                         help="Specify a config file to tell Crafty where to store it's database, version, etc."
                         )
 
+    parser.add_argument('-p', '--port',
+                        help="Allows user to change the default web port for the current session.")
+
     args = parser.parse_args()
 
     # sets up our logger
@@ -229,6 +232,29 @@ if __name__ == '__main__':
     if args.daemonize:
         daemon_mode = args.daemonize
 
+    # Check for port flag activation
+    if args.port:
+
+        # Make sure the user put in an actual number
+        # Make sure that number is above 1024 and below 65566
+        try:
+            port = int(args.port)
+            if 1024 >= port or port > 65565:
+                console.critical('Please input a number above 1024 but below or equal to 65565 as the port desired.')
+                sys.exit()
+        except Exception as e:
+            console.critical('Please input a number above 1024 as the port desired.')
+            sys.exit()
+
+        # Issue warning to user letting them know this could break things if they do not know what they are doing
+        console.critical('** WARNING - Only use this argument if you know what you are doing')
+        response = input('Do you wish to proceed? [Y/n] > ')
+
+        if response.lower() in ['n', 'no']:
+            sys.exit()
+
+        # Now that we have checked the args.port variable and it passes, just call int(args.port) to use it
+
     # do we have access to write to our folder?
     if not helper.check_writeable(os.curdir):
         logger.info("***** Crafty Stopped ***** \n")
@@ -251,7 +277,35 @@ if __name__ == '__main__':
         admin_pass = helper.random_string_generator()
         admin_token = secrets.token_urlsafe(32)
 
-        peewee.default_settings(admin_pass, admin_token)
+        # Ask user if they wish to change their default web port
+        console.warning('You can change your default webport now [Advanced Users Only]')
+        console.warning('Do you wish to change it? [Y/n]')
+        while True:
+            response = input('> ')
+            if response == '':
+                console.warning('Please input a response.')
+                continue
+            if response not in ['y', 'n']:
+                console.warning('Please input a response. "y" or "n"')
+                continue
+            break
+        if response.lower() == 'n':
+            peewee.default_settings(admin_pass, admin_token)
+        else:
+            while True:
+                port = input('Please input a number above 1024 but below or equal to 65565 as the port desired. > ')
+                try:
+                    port = int(port)
+                    if 1024 >= port or port > 65565:
+                        console.critical(
+                            'Please input a number above 1024 but below or equal to 65565 as the port desired.')
+                        continue
+                except Exception as e:
+                    console.critical(
+                        'Please input a number above 1024 but below or equal to 65565 as the port desired.')
+                    continue
+                break
+            peewee.default_settings(admin_pass, admin_token, int(port))
 
     else:
         peewee.do_database_migrations()
@@ -273,9 +327,15 @@ if __name__ == '__main__':
     scheduler.start()
 
     # startup Tornado if we aren't killing all craftys
-    tornado_srv.start_web_server(True)
-    websettings = Webserver.get()
-    port_number = websettings.port_number
+
+    # Check if the port argument was used, if so use it for this session
+    if args.port:
+        tornado_srv.start_web_server(True, int(args.port))
+        port_number = int(args.port)
+    else:
+        tornado_srv.start_web_server(True)
+        websettings = Webserver.get()
+        port_number = websettings.port_number
 
     console.info("Starting Tornado HTTPS Server https://{}:{}".format(helper.get_local_ip(), port_number))
     if fresh_install:

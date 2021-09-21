@@ -46,7 +46,7 @@
 
                         {% if data['parent'] %}
                         <a onclick="sub_form('{{ data['parent'] }}')">
-                            <i class="fas fa-level-up" aria-hidden="true"></i>{{ data['parent'] }}
+                            <i class="fas fa-level-up" aria-hidden="true" style="cursor: pointer">[ << ] {{ data['parent'] }}</i>
                         </a>
                         <br />
                         <br />
@@ -93,7 +93,7 @@
                                                 {% end %}
                                           {% else %}
                                           <a onclick="sub_form('{{ f['name'] }}')">
-                                            <span class="no-drop"> {{ f['name'] }}</span>
+                                            <span class="no-drop" style="cursor: pointer"> {{ f['name'] }}</span>
                                           </a>
                                           {% end %}
                                       </td>
