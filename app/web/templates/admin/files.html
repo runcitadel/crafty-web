@@ -46,7 +46,7 @@
 
                         {% if data['parent'] %}
                         <a onclick="sub_form('{{ data['parent'] }}')">
-                            <i class="fas fa-level-up" aria-hidden="true"></i>{{ data['parent'] }}
+                            <i class="fas fa-level-up" aria-hidden="true" style="cursor: pointer">[ << ] {{ data['parent'] }}</i>
                         </a>
                         <br />
                         <br />
@@ -79,12 +79,12 @@
 
                                       <td>
                                           {% if f['type'] == "file" %}
-                                                {% if f['name'][-4:] in data['ext_list'] %}
+                                                {% if f['ext'] in data['ext_list'] %}
                                                     <a onclick="edit_file('{{ f['name'] }}')">
                                                         <span class="zoom-in text-success">{{ f['name'] }}</span>
                                                     </a>
 
-                                                {% elif f['name'][-4:] == '.zip' %}
+                                                {% elif f['ext'] == '.zip' %}
                                                     <a onclick="extract_file('{{ f['name'] }}')">
                                                         <span class="text-info">{{ f['name'] }}</span>
                                                     </a>
@@ -93,7 +93,7 @@
                                                 {% end %}
                                           {% else %}
                                           <a onclick="sub_form('{{ f['name'] }}')">
-                                            <span class="no-drop"> {{ f['name'] }}</span>
+                                            <span class="no-drop" style="cursor: pointer"> {{ f['name'] }}</span>
                                           </a>
                                           {% end %}
                                       </td>
