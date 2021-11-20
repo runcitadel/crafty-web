@@ -37,7 +37,8 @@
                 </div>
                 <div class="card-body">
                   <form method="post">
-                      <input class="form-control-lg form-control" type="password" name="password" placeholder="{{ _('Type your new password') }}" autocomplete="off" minlength="8" maxlength="512"/>
+                      <input class="form-control-lg form-control" type="password" id="password" name="password" placeholder="{{ _('Type your new password') }}" autocomplete="off" minlength="8" maxlength="512"/>
+                      <input class="form-control-lg form-control" style="margin-top: .5em"type="password" id="confirm-password" name="confirm-password" placeholder="{{ _('Confirm your new password') }}" autocomplete="off" minlength="8" maxlength="512"/>
                       <br />
                       <input type="submit" class="col-12 btn btn-primary btn-load btn-lg" value="{{ _('Change Password') }}">
 
@@ -68,7 +69,17 @@
           <!-- /.card -->
         </div>
     </div>
-
+    <script>
+      document.querySelector('#confirm-password').addEventListener('keyup', function(e) {
+          var pass = document.getElementById("password");
+          var confirm_pass = document.getElementById("confirm-password");
+          if(pass.value != confirm_pass.value) {
+            confirm_pass.setCustomValidity("{{ _('Passwords do not match') }}");
+        } else {
+            confirm_pass.setCustomValidity("");
+        }
+      });
+    </script>
 
 </section>
 

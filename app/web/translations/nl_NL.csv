@@ -39,6 +39,7 @@ Check For Updates, Controleer Op Updates
 Create New Server, Maak Nieuwe Server
 Crafty Controller Version:, Crafty Controller Versie:
 Configure Your Server, Configureer Uw Server
+Confirm your new password, Bevestig uw nieuw wachtwoord
 Change Role, Wijzig Functie
 Change is good, Verandering is goed
 Click here to download the latest update, Klik hier om te laatste update te installeren
@@ -164,6 +165,7 @@ New Scheduled Action, Nieuwe Geplande Actie
 on port, op poort
 only better, alleen beter
 Password, Wachtwoord
+Passwords do not match, Wachtwoorden komen niet overeen
 Players, Spelers
 Players:, Spelers:
 Pre Arguments, Pre-argumenten
@@ -180,7 +182,7 @@ Reload Web Server, Herlaad Web Server
 Revert Jar Update, Jar-update Terugzetten
 Restart Server, Herstart Server
 Role, Functie
-Role:, Functie:
+Role:, Functie:Type your new password, Typ je nieuwe wachtwoord
 Sign In, Aanmelden
 Sign in to manage your server, Meld aan om uw server te beheren
 Server Status, Server Status
