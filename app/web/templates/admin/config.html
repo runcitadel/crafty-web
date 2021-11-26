@@ -256,6 +256,7 @@
                                     <table class="table dataTable" id="users_table">
                                         <thead>
                                         <tr>
+                                            <th>{{ _('UID') }}</th>
                                             <th>{{ _('Username') }}</th>
                                             <th>{{ _('Role') }}</th>
                                             <th>{{ _('Actions') }}</th>
@@ -264,25 +265,26 @@
                                         <tbody>
                                         {% for user in data['users'] %}
                                             <tr>
+                                                <td>{{ user.id }}</td>
                                                 <td>{{ user.username }}</td>
                                                 <td>{{ user.role }}</td>
                                                 <td>
 
-                                                    <a href="#" class="btn btn-sm btn-primary {% if user.username =="Admin" %} disabled {% end %}"
-                                                       onclick="change_role('{{user.username}}')"
-                                                       {% if user.username =="Admin" %} disabled="true" {% end %}
+                                                    <a href="#" class="btn btn-sm btn-primary {% if user.id == 1 %} disabled {% end %}"
+                                                       onclick="change_role('{{user.id}}')"
+                                                       {% if user.id == 1 %} disabled="true" {% end %}
                                                     >
                                                         {{ _('Change Role') }}
                                                     </a>
 
-                                                    <a href="#" class="btn btn-sm btn-warning {% if user.username =="Admin" %} disabled {% end %}"
-                                                       onclick="change_user_password('{{user.username}}')"
+                                                    <a href="#" class="btn btn-sm btn-warning {% if user.id == 1 %} disabled {% end %}"
+                                                       onclick="change_user_password('{{user.id}}')"
                                                     >
                                                         {{ _('Set Password') }}
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-danger {% if user.username =="Admin" %} disabled {% end %}"
-                                                       {% if user.username =="Admin" %} disabled="true" {% end %}
-                                                        onclick="del_user('{{ user.username }}')"
+                                                    <a href="#" class="btn btn-sm btn-danger {% if user.id == 1 %} disabled {% end %}"
+                                                       {% if user.username == 1 %} disabled="true" {% end %}
+                                                        onclick="del_user('{{ user.id }}')"
                                                     >
 
                                                         {{ _('Delete') }}
@@ -319,6 +321,7 @@
                                     <table class="table dataTable" id="roles_table">
                                         <thead>
                                         <tr>
+                                            <th>{{ _('ID') }}</th>
                                             <th>{{ _('Role') }}</th>
                                             <th>{{ _('Controls') }}</th>
                                             <th>{{ _('Console') }}</th>
@@ -334,6 +337,7 @@
                                         <tbody>
                                         {% for role in data['roles'] %}
                                             <tr>
+                                                <td>{{ role.id }}</td>
                                                 <td>{{ role.name }}</td>
                                                 <td>{% if role.svr_control == True %} <i class="fas fa-check-circle text-success"></i> {% else %} <i class="fas fa-times-circle text-danger"></i> {% end %}</td>
                                                 <td>{% if role.svr_console == True %} <i class="fas fa-check-circle text-success"></i> {% else %} <i class="fas fa-times-circle text-danger"></i> {% end %}</td>
@@ -344,16 +348,16 @@
                                                 <td>{% if role.files == True %} <i class="fas fa-check-circle text-success"></i> {% else %} <i class="fas fa-times-circle text-danger"></i> {% end %}</td>
                                                 <td>{% if role.api_access == True %} <i class="fas fa-check-circle text-success"></i> {% else %} <i class="fas fa-times-circle text-danger"></i> {% end %}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-sm btn-warning {% if not user.role =="Admin" %} {% if role.name =="Admin" %} disabled {% end %} {% end %}" data-toggle="tooltip" data-placement="top" title="Edit {{ role.name }}"
-                                                       {% if not user.role =="Admin" %} {% if role.name =="Admin" %} disabled {% end %} {% end %}
-                                                       onclick="edit_role('{{role.name}}')"
+                                                    <a href="#" class="btn btn-sm btn-warning {% if not user.role == 1 %} {% if role.name == 1 %} disabled {% end %} {% end %}" data-toggle="tooltip" data-placement="top" title="Edit {{ role.name }}"
+                                                       {% if not user.role == 1 %} {% if role.name == 1 %} disabled {% end %} {% end %}
+                                                       onclick="edit_role('{{role.id}}')"
                                                     >
                                                         <!--{{ _('Edit') }}-->
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-danger {% if not user.role =="Admin" %} {% if role.name =="Admin" %} disabled {% end %} {% end %}"  data-toggle="tooltip" data-placement="top" title="Delete {{ role.name }}"
-                                                       {% if not user.role =="Admin" %} {% if role.name =="Admin" %} disabled="true" {% end %} {% end %}
-                                                        onclick="del_role('{{ role.name }}')"
+                                                    <a href="#" class="btn btn-sm btn-danger {% if not user.role == 1 %} {% if role.name == 1 %} disabled {% end %} {% end %}"  data-toggle="tooltip" data-placement="top" title="Delete {{ role.name }}"
+                                                       {% if not user.role == 1 %} {% if role.name == 1 %} disabled="true" {% end %} {% end %}
+                                                        onclick="del_role('{{ role.id }}')"
                                                     >
                                                         <!--{{ _('Delete') }}-->
                                                         <i class="fas fa-trash"></i>
@@ -428,14 +432,14 @@
         return r ? r[1] : undefined;
     }
 
-    function del_user(username){
+    function del_user(uid){
 
         var token = getCookie("_xsrf")
 
-        if (username == "Admin") return False;
+        if (uid == 1) return False;
 
         bootbox.confirm({
-            message: "Are you sure you wish to delete user: " + username + "?",
+            message: "Are you sure you wish to delete user ID: " + uid + "?",
             buttons: {
                 confirm: {
                     label: 'Yes',
@@ -448,9 +452,9 @@
             },
             callback: function(result){
                 if (result){
-                    console.log('deleting user ' + username);
+                    console.log('deleting user ' + uid);
 
-                    data_to_send = { username : username };
+                    data_to_send = { uid : uid };
 
                     $.ajax({
                       type: "POST",
@@ -503,17 +507,17 @@
         });
     }
 
-    function change_user_password(user) {
+    function change_user_password(uid) {
 
         var token = getCookie("_xsrf")
 
         bootbox.prompt({
-            title: "Enter the New Password for " + user,
+            title: "Enter the New Password for " + uid,
             callback: function(result){
                 if (result){
                     console.log('changing users password to' + result);
 
-                    data_to_send = { username : user, password: result };
+                    data_to_send = { uid : uid, password: result };
 
                     $.ajax({
                       type: "POST",
@@ -537,26 +541,26 @@
         });
     }
 
-    function change_role(user){
+    function change_role(uid){
         var token = getCookie("_xsrf")
 
-        if (user == "Admin") return False;
+        if (uid == 1) return False;
 
         bootbox.prompt({
-            title: "Select the new role for " + user,
+            title: "Select the new role for " + uid,
             inputType: 'select',
             inputOptions: [
                 {% for role in data['roles'] %} {
                         text: '{{ role.name }}',
-                        value: '{{ role.name }}',
+                        value: '{{ role.id }}',
                     },
                 {% end %}
             ],
             callback: function (result) {
                 if (result){
-                    console.log('changing ' + user + " to role " + result );
+                    console.log('changing ' + uid + " to role " + result );
 
-                    data_to_send = { username : user, role: result };
+                    data_to_send = { uid : uid, rid: result };
 
                     $.ajax({
                       type: "POST",
@@ -602,14 +606,14 @@
         });
     }
     
-    function edit_role(rolename) {
+    function edit_role(rid) {
         
         var token = getCookie("_xsrf")
         
-        if (rolename == "Admin") return False;
+        if (rid == 1) return False;
 
         bootbox.prompt({
-            title: "You're editing the role "+rolename,
+            title: "You're editing the role "+rid,
             inputType: 'checkbox',
             inputOptions: [{
                 text: 'Server Control',
@@ -646,9 +650,9 @@
             callback: function(result){
                 if (result){
 
-                    var selectedRoles = { rolename : rolename, result : result };
+                    var selectedRoles = { rid : rid, result : result };
                     selectedRoles = selectedRoles.result;
-                    console.log('editing role : '+rolename + ' with ');
+                    console.log('editing role : '+rid + ' with ');
                     console.log(selectedRoles);
 
                     var new_svr_control = "False";
@@ -699,7 +703,7 @@
                         }
                     }
 
-                    data_to_send = { rolename : rolename, svr_control : new_svr_control, svr_console : new_svr_console, logs : new_logs, backups : new_backups, schedules : new_schedules, config : new_config, files : new_files, api_access : new_api_access };
+                    data_to_send = { rid : rid, svr_control : new_svr_control, svr_console : new_svr_console, logs : new_logs, backups : new_backups, schedules : new_schedules, config : new_config, files : new_files, api_access : new_api_access };
                     console.log('data_to_send:');
                     console.log(data_to_send);
 
@@ -724,14 +728,14 @@
         });
     }
     
-    function del_role(rolename){
+    function del_role(rid){
 
         var token = getCookie("_xsrf")
 
-        if (rolename == "Admin") return False;
+        if (rid == 1) return False;
 
         bootbox.confirm({
-            message: "Are you sure you wish to delete role: " + rolename + "?",
+            message: "Are you sure you wish to delete role: " + rid + "?",
             buttons: {
                 confirm: {
                     label: 'Yes',
@@ -744,9 +748,9 @@
             },
             callback: function(result){
                 if (result){
-                    console.log('deleting role ' + rolename);
+                    console.log('deleting role ' + rid);
 
-                    data_to_send = { rolename : rolename };
+                    data_to_send = { rid : rid };
 
                     $.ajax({
                       type: "POST",

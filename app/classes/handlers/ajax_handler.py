@@ -341,16 +341,17 @@ class AjaxHandler(BaseHandler):
                     user_data['username'], user_data['role_name'], "Edit User Role"))
                 self.redirect('/admin/unauthorized')
 
-            username = bleach.clean(self.get_argument("username", None, True))
-            role = bleach.clean(self.get_argument("role", None, True))
+            uid = bleach.clean(self.get_argument("uid", None, True))
+            rid = bleach.clean(self.get_argument("rid", None, True))
 
-            if username == 'Admin':
+            if uid == 1:
                 self.write("Not Allowed")
             else:
-                if username and role:
+                if uid and rid:
+                    role = Roles.get(Roles.id == int(rid))
                     Users.update({
-                        Users.role: role
-                    }).where(Users.username == username).execute()
+                        Users.role: role.name
+                    }).where(Users.id == int(uid)).execute()
 
                     self.write('updated')
 
@@ -360,13 +361,13 @@ class AjaxHandler(BaseHandler):
                     user_data['username'], user_data['role_name'], "Change other user's password"))
                 self.redirect('/admin/unauthorized')
 
-            username = bleach.clean(self.get_argument("username", None, True))
+            uid = bleach.clean(self.get_argument("uid", None, True))
             newpassword = bleach.clean(self.get_argument("password", None, True))
 
-            if username and newpassword:
+            if uid and newpassword:
                 Users.update({
                     Users.password: helper.encode_pass(newpassword)
-                }).where(Users.username == username).execute()
+                }).where(Users.id == int(uid)).execute()
 
             self.write(newpassword)
 
@@ -376,14 +377,14 @@ class AjaxHandler(BaseHandler):
                     user_data['username'], user_data['role_name'], "Delete User"))
                 self.redirect('/admin/unauthorized')
 
-            username = bleach.clean(self.get_argument("username", None, True))
+            uid = bleach.clean(self.get_argument("uid", None, True))
 
-            if username == 'Admin':
+            if uid == 1:
                 self.write("Not Allowed")
             else:
-                if username:
-                    Users.delete().where(Users.username == username).execute()
-                    self.write("{} deleted".format(username))
+                if uid:
+                    Users.delete().where(Users.id == int(uid)).execute()
+                    self.write("{} deleted".format(uid))
 
         elif page == 'add_role':
             if not user_data['config']:
@@ -416,7 +417,7 @@ class AjaxHandler(BaseHandler):
                     user_data['username'], user_data['role_name'], "Edit Role"))
                 self.redirect('/admin/unauthorized')
 
-            rolename = bleach.clean(self.get_argument("rolename", None, True))
+            rid = bleach.clean(self.get_argument("rid", None, True))
             
             new_svr_control = 'True' == bleach.clean(self.get_argument("svr_control", False, True))
             new_svr_console = 'True' == bleach.clean(self.get_argument("svr_console", False, True))
@@ -427,7 +428,7 @@ class AjaxHandler(BaseHandler):
             new_files = 'True' == bleach.clean(self.get_argument("files", False, True))
             new_api_access = 'True' == bleach.clean(self.get_argument("api_access", False, True))
 
-            if rolename:
+            if rid:
                 result = Roles.update({
                     Roles.svr_control: new_svr_control,
                     Roles.svr_console: new_svr_console,
@@ -437,9 +438,9 @@ class AjaxHandler(BaseHandler):
                     Roles.config: new_config,
                     Roles.files: new_files,
                     Roles.api_access: new_api_access,
-                }).where(Roles.name == rolename).execute()
+                }).where(Roles.id == int(rid)).execute()
                     
-                self.write("{} edited".format(rolename))
+                self.write("{} edited".format(rid))
 
         elif page == 'del_role':
             if not user_data['config']:
@@ -447,14 +448,14 @@ class AjaxHandler(BaseHandler):
                     user_data['username'], user_data['role_name'], "Delete Role"))
                 self.redirect('/admin/unauthorized')
 
-            rolename = bleach.clean(self.get_argument("rolename", None, True))
+            rid = bleach.clean(self.get_argument("rid", None, True))
 
-            if rolename == 'Admin':
+            if rid == 1:
                 self.write("Not Allowed")
             else:
-                if rolename:
-                    Roles.delete().where(Roles.name == rolename).execute()
-                    self.write("{} deleted".format(rolename))
+                if rid:
+                    Roles.delete().where(Roles.id == int(rid)).execute()
+                    self.write("{} deleted".format(rid))
 
         elif page == 'save_file':
             if not user_data['files']:
