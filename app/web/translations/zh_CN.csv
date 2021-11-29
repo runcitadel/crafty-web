@@ -1,0 +1,295 @@
+Autostart, 自动启动
+Auto Start Server after 10 Seconds:, 10 秒后自动启动服务器：
+Additional Args? (arguments to add after the memory arguments of server command), 附加参数？（服务器启动命令的内存参数之后要添加的参数）
+Arguments after memory arguments, 内存参数后的参数
+After Arguments, 附加参数
+Additional Args? (arguments to add at the end of server command), 附加参数？（服务器启动命令的结尾要添加的参数）
+Auto Start Server On Program Launch?, 在程序启动时自动启动服务器？
+Auto Start Delay In Seconds, 自动启动延迟（以秒为单位）
+Auto Start Priority, 自动启动优先级
+Add User, 添加用户
+A secure password is actually a phrase, 安全密钥实际上是一个短语
+All rights reserved., 保留所有权利。
+Auto Start Details, 自动启动详情
+Auto Start On:, 在该时间自动启动：
+Auto Start Delay:, 自动启动延迟：
+Auto Start Priority:, 自动启动优先级：
+Auto Start Server after 10 Seconds, 10 秒后自动启动服务器
+An empty value means "every". For instance: Backup every 1 hour, 空值代表“每次都执行”。例如：每 1 小时备份。
+A scheduled task, 一个计划任务
+Action, 操作
+Autostart Delay, 自动启动延迟
+Actions, 操作
+available, 可用
+and kept for, 并保留
+API Access, API 访问
+Are you sure you wish to delete user:, 您确定要删除该用户吗？
+Admin, 超级管理员
+Backup, 备份
+Branch, 分支
+Because the NSA won't send their copy, 因为美国国家安全局不会发送他们的副本
+Backups for Server ID:, 该服务器 ID 的备份：
+Backup Server Now, 现在备份服务器
+Backup Worlds, 备份所有世界
+Backup every, 每经过该时间间隔备份一次：
+Be careful here., 此处请小心。
+Crafty Controller - Login, Crafty Controller - 登录
+Crafty Controller Login, Crafty Controller 登录
+Change Password, 更改密码
+Check For Updates, 检查更新
+Create New Server, 创建新服务器
+Crafty Controller Version:, Crafty Controller 版本：
+Configure Your Server, 配置您的服务器
+Change Role, 更改角色
+Change is good, 更改无误
+Click here to download the latest update, 点击这里来下载最新的更新
+Current, 当前
+Change Your Password, 更改您的密码
+Change Password For:, 为其更改密码：
+Creepers hate me so much, 苦力怕非常讨厌我
+Crafty will try to connect to, Crafty 将会尝试连接到
+Check your history interval config, 检查您的历史记录间隔配置
+Current Players, 当前玩家
+Change Backup Config, 更改备份配置
+Click On The Log Below To Scroll To Bottom, 点击下方的日志来滚动到底部
+Cancel, 取消
+Comment, 备注
+Click thumb to toggle, 点击图标以切换
+Current Directory:, 当前目录：
+Dashboard, 仪表板
+Documentation, 文档
+Details, 详情
+Disabled, 已禁用
+Default is 25565 - this is the port crafty will use to get server stats. This should match your server.properties file, 默认值为 25565——这是 Crafty 用来获取服务器状态的端口。这应该与您的 server.properties 文件内的设置相匹配。
+Default is 127.0.0.1 - this is the ip crafty will use to get server stats, 默认值为 127.0.0.1——这是 Crafty 用来获取服务器状态的 IP。
+Delete Server, 删除服务器
+Default of 8000 - 443 and 80 require root on linux, 默认值为 8000——443 和 80 端口需要在 Linux 上需要 root 权限以监听。
+Default of 2121 - 21 and 20 require root on linux, 默认值为 2121——21 和 20 端口需要在 Linux 上需要 root 权限以监听。
+Delete, 删除
+Days, 天
+days, 天
+Download, 下载
+Down, 离线
+Extra Arguments, 附加参数
+Example:, 示例：
+Enabled, 启用
+entries, 项目
+Example: 2048, 示例：2048
+Example: 1014, 示例：1014
+Example /var/opt/minecraft/server, 例如 /var/opt/minecraft/server
+Example paper.jar, 例如 paper.jar
+Example Survival Server, 例如“生存服务器”
+Enter you server command, 输入服务器指令
+Existing Backups, 现存备份
+Enter Your Search String, 输入搜索字符串
+Enter your server command, 输入服务器指令
+Example: 2048 - Currently, 示例：2048 - 当前
+Example: 1024 - Currently, 示例: 1024 - 当前
+Example c:\minecraft\server, 例如 c:\minecraft\server
+Enter the New Users Username, 输入新用户的用户名
+Enter the New Password for, 为该用户输入新密码：
+Files, 文件
+FTP User, FTP 用户
+FTP Password, FTP 密码
+FTP Port, FTP 端口
+False, 否
+Friday, 星期五
+File Management, 文件管理
+File, 文件
+FTP Server Control: Server is currently, FTP 服务器控制：当前服务器
+Getting Version Data, 正在获取版本数据
+Host CPU, 主机 CPU
+Host RAM, 主机内存
+Host Root Disk, 主机根磁盘
+HOST TOTAL CPU USAGE, 主机总 CPU 使用量
+HOST TOTAL RAM USAGE, 主机总内存使用量
+HOST TOTAL DISK USAGE, 主机总磁盘使用量
+Home, 主页
+Has no effect if auto start is turned off (Example: 10), 如果自动启动被关闭则无效（示例：10）
+https://example.com/latest/server.jar, https://example.com/latest/server.jar
+Highest Priority, 最高优先级
+Historical Data Capture Interval, 历史数据捕获间隔
+How many minutes between historical data capture, 在每次捕获历史数据之间要间隔多少分钟
+Historical Data Length, 历史数据长度
+How many days should we keep historical data, 我们要保留多少天的历史数据
+Historical Data will be captured every, 每隔该时间后捕获历史数据：
+Historical Data, 历史数据
+How Often, 多久一次
+Hours, 小时
+installed, 已安装
+I want crafty to automatically restart the server, 我希望 Crafty 自动重启服务器
+I demand to see the things!, 我要求查看这些东西！
+Invalid Settings Detected: Server Path Does Not Exists, 检测到无效设置：服务器路径不存在
+Invalid Settings Detected:, 检测到无效设置：
+I don't know... Have you checked the logs?, 我不知道……你检查过日志了吗？
+Issue Command, 提交指令
+Interval Type, 间隔类型
+It's like a bot, 那像是个机器人
+Join The Discord, 加入 Discord
+Jar Update URL, 服务端 Jar 核心升级地址
+Keys to a good password, 优秀密码的关键
+Lowest Priority, 最低优先级
+Logs for Server:, 该服务器的日志：
+Logs, 日志
+Latest Errors, 最新错误
+Latest Warnings, 最新警告
+Line, 行
+Memory, 内存
+MAIN NAVIGATION, 主导航栏
+Medium Priority, 中优先级
+minutes, 分钟
+Minecraft Server Config, Minecraft 服务器配置
+Maximum Memory To Use in MB? (example: 2048), 可使用的最大内存？（以 MB 为单位，示例：2048）
+Minimum Memory To Use in MB? (example: 1024), 可使用的最小内存？（以 MB 为单位，示例：2048）
+My New Server, 我的新服务器
+Missing Data below?, 下方没有数据？
+Minutes, 分钟
+Monday, 星期一
+Max Memory, 最大内存
+Min Memory, 最小内存
+MyFirstServer, 我的第一个服务器
+Mod, 管理员
+No - I will start the server myself., 不——我要自己启动服务器。
+No effect if auto start is not enabled, 如果自动启动没有启用，将不会生效
+No - I will start the server myself if it crashes., 不——如果服务器崩溃了，我要自己启动。
+Note the Admin can not be deleted or changed, 注意，超级管理员不能被删除或更改。
+Next, 下一个
+Not Started, 未启动
+NOT, 不
+No update jar URL specified., 服务端 Jar 核心更新地址未指定。
+No Players Online, 无玩家在线
+Note: this page doesn't auto-refresh, 注意：这个页面不会自动刷新
+No data available in table, 数据表中没有可用的数据
+Next, 下一个
+New Scheduled Action, 新计划操作
+on port, 在此端口上：
+only better, 只会变得更好
+Password, 密码
+Players, 玩家
+Players:, 玩家:
+Pre Arguments, 预先参数
+Previous, 上一个
+Please add in, 请添加进来
+Path, 路径
+Password:, 密码：
+Port:, 端口：
+Permissions, 权限
+Page Cannot Be Displayed, 页面无法显示
+Running, 运行中
+Reload MC Settings, 重载 MC 设置
+Reload Web Server, 重载网页服务器
+Revert Jar Update, 回滚服务端 Jar 核心更新
+Restart Server, 重启服务器
+Role, 角色
+Role:, 角色：
+Sign In, 登录
+Sign in to manage your server, 登录以管理您的服务器
+Server Status, 服务器状态
+Server Down, 服务器已离线
+Server, 服务器
+Server Defined, 服务器已创建
+Status, 状态
+Stopped, 已停止
+Server Start Time, 服务器启动时间
+Server Type, 服务器类型
+Server Description, 服务器说明
+Server IP : Server Port, 服务器 IP : 服务器端口
+Server IP, 服务器 IP
+Server Port, 服务器端口
+Server Configuration, 服务器配置
+Server Config, 服务器配置
+server config, 服务器配置
+Server Name, 服务器名称
+Server Path, 服务器路径
+Server Jar, 服务端 Jar 核心
+Server Max Memory, 服务器最大内存
+Server Max Memory in MB, 服务器最大内存（以 MB 为单位）
+Server Min Memory, 服务器最小内存
+Server Min Memory in MB, 服务器最小内存（以 MB 为单位）
+Server Jar Update URL - This is where you define where to update the jar from., 服务端 Jar 核心更新地址——这是你设置服务端 Jar 核心更新来源的地方。
+Save, 保存
+Show, 显示
+Set Password, 设置密码
+Search:, 搜索：
+set to autostart, 设置自动启动
+Server Data, 服务器数据
+Server Actions, 服务器操作
+Start New World, 创建新世界
+Server Details, 服务器详情
+Server Control, 服务器控制
+Sometimes you just need a terminal, 有些时候你只需要一个终端
+Stop Auto-Scrolling, 停止自动滚动
+Send Command, 发送指令
+Server Backups, 服务器备份
+Server Backup, 服务器备份
+Show, 显示
+Size, 大小
+Search Latest.log, 搜索 Latest.log
+Scheduled Tasks, 计划任务
+Select Your Action, 选择你的操作
+Start Server, 启动服务器
+Stop Server, 停止服务器
+Saturday, 星期六
+Sunday, 星期日
+Scheduled Actions, 计划操作
+Start FTP Server, 启动 FTP 服务器
+Stop FTP Server, 停止 FTP 服务器
+Server Jar Here, 在这里填入服务端 Jar 核心文件名
+Server Path Here, 在这里填入服务器路径
+Save and Finish, 保存并完成
+Server Console, 服务器控制台
+Server Logs, 服务器日志
+Server Schedule, 服务器计划
+Sign out, 注销
+Select the new role for, 为该用户选择一个新角色：
+Staff, 员工
+Tasks, 任务
+Turn On Crash Detection?, 开启崩溃检测？
+This will detect server crashes and restart them, 此功能将检测服务器是否崩溃，并重启服务器。
+The server will be launched using this string:, 服务器将会用该字符串来启动：
+The server is, 服务器是
+This can should be unique to the FTP service, 对于 FTP 服务来说，此项应是唯一的。
+This should be at least 8 letters long - maybe 15 characters, 至少应该有 8 个字符——也许 15 个字符会比较好。
+Type your new password, 输入你的新密码
+that is at least 10 char long and contains uncommon words:, 此项至少需要有 10 个子服，并且不包含常见单词：
+to get server status, 以获取服务器状态
+threads, 线程
+Tuesday, 星期二
+Thursday, 星期四
+Time, 时间
+Time is disabled for minute and hour values, 分钟和小时的值已在时间中被禁用
+The credentials are:, 凭据如下：
+The users new password is:, 用户的新密码是：
+Testing, 测试中
+Username, 用户名
+Unable to connect, 无法连接
+Users, 用户
+users defined, 用户已创建
+Update Jar, 更新 Jar
+Update Server Jar, 更新服务端 Jar 核心
+Up, 运行中
+Username:, 用户名：
+Version Update Checker, 版本更新检查器
+Version, 版本
+Virtual Console for server:, 该服务器的虚拟控制台：
+Virtual Console, 虚拟控制台
+What do you call this server? (example: CraftySurvival), 你打算把这个服务器叫做什么？（例如：Crafty生存）
+What folder is your server in? (example: C:\minecraft\server), 你的服务器在哪个文件夹里？（例如：C:\minecraft\server）
+What is your jar filename? (example: paper.jar), 你的服务端 jar 核心的文件名是什么？（例如：paper.jar）
+Webserver Port, 网页服务器端口
+World Name, 世界名称
+World Size, 世界大小
+Warning, 警告
+Wednesday, 星期三
+You can not rename servers at this time, 你当前无法重命名服务器
+Yes - Start the Minecraft Server on program launch., 是的——在程序启动时启动 Minecraft 服务器。
+Yes - If the server stops, 是的——如果服务器停止了
+Your Current Config, 您的当前配置
+Your API Key:, 您的 API 密钥：
+You have, 您有
+you have, 您有
+Your backups are stored in:, 您的备份存放在了：
+You are backing up these paths:, 您正在备份下列路径：
+You are here, 你在这里
+Yes, 是的
+5 Questions and a checkbox until you're done, 距完成还有 5 个问题和一个复选框。
