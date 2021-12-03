@@ -40,6 +40,7 @@ Check For Updates, 检查更新
 Create New Server, 创建新服务器
 Crafty Controller Version:, Crafty Controller 版本：
 Configure Your Server, 配置您的服务器
+Confirm your new password, 确认您的新密码
 Change Role, 更改角色
 Change is good, 更改无误
 Click here to download the latest update, 点击这里来下载最新的更新
@@ -165,6 +166,7 @@ New Scheduled Action, 新计划操作
 on port, 在此端口上：
 only better, 只会变得更好
 Password, 密码
+Passwords do not match, 密码不一致
 Players, 玩家
 Players:, 玩家:
 Pre Arguments, 预先参数
