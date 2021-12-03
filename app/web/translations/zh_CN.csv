@@ -122,7 +122,7 @@ I want crafty to automatically restart the server, 我希望 Crafty 自动重启
 I demand to see the things!, 我要求查看这些东西！
 Invalid Settings Detected: Server Path Does Not Exists, 检测到无效设置：服务器路径不存在
 Invalid Settings Detected:, 检测到无效设置：
-I don't know... Have you checked the logs?, 我不知道……你检查过日志了吗？
+I don't know... Have you checked the logs?, 我不知道……您检查过日志了吗？
 Issue Command, 提交指令
 Interval Type, 间隔类型
 It's like a bot, 那像是个机器人
@@ -208,7 +208,7 @@ Server Max Memory, 服务器最大内存
 Server Max Memory in MB, 服务器最大内存（以 MB 为单位）
 Server Min Memory, 服务器最小内存
 Server Min Memory in MB, 服务器最小内存（以 MB 为单位）
-Server Jar Update URL - This is where you define where to update the jar from., 服务端 Jar 核心更新地址——这是你设置服务端 Jar 核心更新来源的地方。
+Server Jar Update URL - This is where you define where to update the jar from., 服务端 Jar 核心更新地址——这是您设置服务端 Jar 核心更新来源的地方。
 Save, 保存
 Show, 显示
 Set Password, 设置密码
@@ -219,7 +219,7 @@ Server Actions, 服务器操作
 Start New World, 创建新世界
 Server Details, 服务器详情
 Server Control, 服务器控制
-Sometimes you just need a terminal, 有些时候你只需要一个终端
+Sometimes you just need a terminal, 有些时候您只需要一个终端
 Stop Auto-Scrolling, 停止自动滚动
 Send Command, 发送指令
 Server Backups, 服务器备份
@@ -228,7 +228,7 @@ Show, 显示
 Size, 大小
 Search Latest.log, 搜索 Latest.log
 Scheduled Tasks, 计划任务
-Select Your Action, 选择你的操作
+Select Your Action, 选择您的操作
 Start Server, 启动服务器
 Stop Server, 停止服务器
 Saturday, 星期六
@@ -252,7 +252,7 @@ The server will be launched using this string:, 服务器将会用该字符串�
 The server is, 服务器是
 This can should be unique to the FTP service, 对于 FTP 服务来说，此项应是唯一的。
 This should be at least 8 letters long - maybe 15 characters, 至少应该有 8 个字符——也许 15 个字符会比较好。
-Type your new password, 输入你的新密码
+Type your new password, 输入您的新密码
 that is at least 10 char long and contains uncommon words:, 此项至少需要有 10 个子服，并且不包含常见单词：
 to get server status, 以获取服务器状态
 threads, 线程
@@ -275,15 +275,15 @@ Version Update Checker, 版本更新检查器
 Version, 版本
 Virtual Console for server:, 该服务器的虚拟控制台：
 Virtual Console, 虚拟控制台
-What do you call this server? (example: CraftySurvival), 你打算把这个服务器叫做什么？（例如：Crafty生存）
-What folder is your server in? (example: C:\minecraft\server), 你的服务器在哪个文件夹里？（例如：C:\minecraft\server）
-What is your jar filename? (example: paper.jar), 你的服务端 jar 核心的文件名是什么？（例如：paper.jar）
+What do you call this server? (example: CraftySurvival), 您打算把这个服务器叫做什么？（例如：Crafty生存）
+What folder is your server in? (example: C:\minecraft\server), 您的服务器在哪个文件夹里？（例如：C:\minecraft\server）
+What is your jar filename? (example: paper.jar), 您的服务端 jar 核心的文件名是什么？（例如：paper.jar）
 Webserver Port, 网页服务器端口
 World Name, 世界名称
 World Size, 世界大小
 Warning, 警告
 Wednesday, 星期三
-You can not rename servers at this time, 你当前无法重命名服务器
+You can not rename servers at this time, 您当前无法重命名服务器
 Yes - Start the Minecraft Server on program launch., 是的——在程序启动时启动 Minecraft 服务器。
 Yes - If the server stops, 是的——如果服务器停止了
 Your Current Config, 您的当前配置
@@ -292,6 +292,6 @@ You have, 您有
 you have, 您有
 Your backups are stored in:, 您的备份存放在了：
 You are backing up these paths:, 您正在备份下列路径：
-You are here, 你在这里
+You are here, 您在这里
 Yes, 是的
 5 Questions and a checkbox until you're done, 距完成还有 5 个问题和一个复选框。
