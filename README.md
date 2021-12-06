@@ -35,7 +35,7 @@ Install documentation is available here on GitLab via the [wiki](https://gitlab.
 Check out our shiny new documentation [right on GitLab](https://gitlab.com/crafty-controller/crafty-web/wikis/home).
 
 ## Meta
-Phillip Tarrant - [Project Homepage](https://craftycontrol.com/)
+Crafty Controller Website - [Project Homepage](https://craftycontrol.com/)
 
 Discord Channel - [Here](https://discord.gg/9VJPhCE)
 
