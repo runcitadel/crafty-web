@@ -370,7 +370,7 @@ class multi_serve():
 
         try:
             cpu_freq = psutil.cpu_freq()
-        except NotImplementedError:
+        except (NotImplementedError, FileNotFoundError):
             cpu_freq = psutil._common.scpufreq(current=0, min=0, max=0)
         if cpu_freq is None:
             cpu_freq = psutil._common.scpufreq(current=0, min=0, max=0)
