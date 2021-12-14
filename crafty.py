@@ -278,34 +278,37 @@ if __name__ == '__main__':
         admin_token = secrets.token_urlsafe(32)
 
         # Ask user if they wish to change their default web port
-        console.warning('You can change your default webport now [Advanced Users Only]')
-        console.warning('Do you wish to change it? [Y/n]')
-        while True:
-            response = input('> ')
-            if response == '':
-                console.warning('Please input a response.')
-                continue
-            if response not in ['y', 'n']:
-                console.warning('Please input a response. "y" or "n"')
-                continue
-            break
-        if response.lower() == 'n':
-            peewee.default_settings(admin_pass, admin_token)
-        else:
+        if not args.daemonize:
+            console.warning('You can change your default webport now [Advanced Users Only]')
+            console.warning('Do you wish to change it? [Y/n]')
             while True:
-                port = input('Please input a number above 1024 but below or equal to 65565 as the port desired. > ')
-                try:
-                    port = int(port)
-                    if 1024 >= port or port > 65565:
+                response = input('> ')
+                if response == '':
+                    console.warning('Please input a response.')
+                    continue
+                if response not in ['y', 'n']:
+                    console.warning('Please input a response. "y" or "n"')
+                    continue
+                break
+            if response.lower() == 'n':
+                peewee.default_settings(admin_pass, admin_token)
+            else:
+                while True:
+                    port = input('Please input a number above 1024 but below or equal to 65565 as the port desired. > ')
+                    try:
+                        port = int(port)
+                        if 1024 >= port or port > 65565:
+                            console.critical(
+                                'Please input a number above 1024 but below or equal to 65565 as the port desired.')
+                            continue
+                    except Exception as e:
                         console.critical(
                             'Please input a number above 1024 but below or equal to 65565 as the port desired.')
                         continue
-                except Exception as e:
-                    console.critical(
-                        'Please input a number above 1024 but below or equal to 65565 as the port desired.')
-                    continue
-                break
-            peewee.default_settings(admin_pass, admin_token, int(port))
+                    break
+                peewee.default_settings(admin_pass, admin_token, int(port))
+        else:
+            peewee.default_settings(admin_pass, admin_token, 8000)
 
     else:
         peewee.do_database_migrations()
