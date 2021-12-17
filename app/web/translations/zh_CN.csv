@@ -1,3 +1,4 @@
+Automatically Download Server Jar from Url, 自动从指定地址下载服务器 Jar 核心
 Autostart, 自动启动
 Auto Start Server after 10 Seconds:, 10 秒后自动启动服务器：
 Additional Args? (arguments to add after the memory arguments of server command), 附加参数？（服务器启动命令的内存参数之后要添加的参数）
@@ -7,6 +8,7 @@ Additional Args? (arguments to add at the end of server command), 附加参数�
 Auto Start Server On Program Launch?, 在程序启动时自动启动服务器？
 Auto Start Delay In Seconds, 自动启动延迟（以秒为单位）
 Auto Start Priority, 自动启动优先级
+Add Role, 添加角色
 Add User, 添加用户
 A secure password is actually a phrase, 安全密钥实际上是一个短语
 All rights reserved., 保留所有权利。
@@ -23,6 +25,7 @@ Actions, 操作
 available, 可用
 and kept for, 并保留
 API Access, API 访问
+API access, API 访问
 Are you sure you wish to delete user:, 您确定要删除该用户吗？
 Admin, 超级管理员
 Backup, 备份
@@ -32,7 +35,9 @@ Backups for Server ID:, 该服务器 ID 的备份：
 Backup Server Now, 现在备份服务器
 Backup Worlds, 备份所有世界
 Backup every, 每经过该时间间隔备份一次：
+Backups, 备份
 Be careful here., 此处请小心。
+Crafty Config, Crafty 配置
 Crafty Controller - Login, Crafty Controller - 登录
 Crafty Controller Login, Crafty Controller 登录
 Change Password, 更改密码
@@ -54,11 +59,18 @@ Current Players, 当前玩家
 Change Backup Config, 更改备份配置
 Click On The Log Below To Scroll To Bottom, 点击下方的日志来滚动到底部
 Cancel, 取消
+Command, 指令
 Comment, 备注
+Config, 配置
+Configuration, 配置
+Console, 控制台
+Controls, 控制
 Click thumb to toggle, 点击图标以切换
 Current Directory:, 当前目录：
+Currently, 当前
 Dashboard, 仪表板
 Documentation, 文档
+Defined, 已创建
 Details, 详情
 Disabled, 已禁用
 Default is 25565 - this is the port crafty will use to get server stats. This should match your server.properties file, 默认值为 25565——这是 Crafty 用来获取服务器状态的端口。这应该与您的 server.properties 文件内的设置相匹配。
@@ -71,14 +83,18 @@ Days, 天
 days, 天
 Download, 下载
 Down, 离线
+Edit, 编辑
 Extra Arguments, 附加参数
 Example:, 示例：
 Enabled, 启用
+Ensure Path Exists, 确保路径存在
 entries, 项目
+Example: https://example.com/files/server.jar, 示例：https://example.com/files/server.jar
 Example: 2048, 示例：2048
 Example: 1014, 示例：1014
 Example /var/opt/minecraft/server, 例如 /var/opt/minecraft/server
 Example paper.jar, 例如 paper.jar
+Example server.jar, 例如 server.jar
 Example Survival Server, 例如“生存服务器”
 Enter you server command, 输入服务器指令
 Existing Backups, 现存备份
@@ -87,6 +103,7 @@ Enter your server command, 输入服务器指令
 Example: 2048 - Currently, 示例：2048 - 当前
 Example: 1024 - Currently, 示例: 1024 - 当前
 Example c:\minecraft\server, 例如 c:\minecraft\server
+Enter the command you wish to schedule, 输入您想要计划的指令
 Enter the New Users Username, 输入新用户的用户名
 Enter the New Password for, 为该用户输入新密码：
 Files, 文件
@@ -132,14 +149,17 @@ Keys to a good password, 优秀密码的关键
 Lowest Priority, 最低优先级
 Logs for Server:, 该服务器的日志：
 Logs, 日志
+Language, 语言
 Latest Errors, 最新错误
 Latest Warnings, 最新警告
 Line, 行
+Mem, 内存
 Memory, 内存
 MAIN NAVIGATION, 主导航栏
 Medium Priority, 中优先级
 minutes, 分钟
 Minecraft Server Config, Minecraft 服务器配置
+Minecraft Servers, Minecraft 服务器
 Maximum Memory To Use in MB? (example: 2048), 可使用的最大内存？（以 MB 为单位，示例：2048）
 Minimum Memory To Use in MB? (example: 1024), 可使用的最小内存？（以 MB 为单位，示例：2048）
 My New Server, 我的新服务器
@@ -150,6 +170,8 @@ Max Memory, 最大内存
 Min Memory, 最小内存
 MyFirstServer, 我的第一个服务器
 Mod, 管理员
+New File, 新建文件
+New Folder, 新建文件夹
 No - I will start the server myself., 不——我要自己启动服务器。
 No effect if auto start is not enabled, 如果自动启动没有启用，将不会生效
 No - I will start the server myself if it crashes., 不——如果服务器崩溃了，我要自己启动。
@@ -163,12 +185,14 @@ Note: this page doesn't auto-refresh, 注意：这个页面不会自动刷新
 No data available in table, 数据表中没有可用的数据
 Next, 下一个
 New Scheduled Action, 新计划操作
+of, 的
 on port, 在此端口上：
 only better, 只会变得更好
 Password, 密码
 Passwords do not match, 密码不一致
 Players, 玩家
 Players:, 玩家:
+Please stop the server before deleting it., 请在删除服务器前先停止它。
 Pre Arguments, 预先参数
 Previous, 上一个
 Please add in, 请添加进来
@@ -183,9 +207,11 @@ Reload Web Server, 重载网页服务器
 Revert Jar Update, 回滚服务端 Jar 核心更新
 Restart Server, 重启服务器
 Role, 角色
+Roles, 角色
 Role:, 角色：
 Sign In, 登录
 Sign in to manage your server, 登录以管理您的服务器
+seconds, 秒
 Server Status, 服务器状态
 Server Down, 服务器已离线
 Server, 服务器
@@ -208,6 +234,7 @@ Server Max Memory, 服务器最大内存
 Server Max Memory in MB, 服务器最大内存（以 MB 为单位）
 Server Min Memory, 服务器最小内存
 Server Min Memory in MB, 服务器最小内存（以 MB 为单位）
+Server Jar Download (Optional), 服务端 Jar 核心下载（可选）
 Server Jar Update URL - This is where you define where to update the jar from., 服务端 Jar 核心更新地址——这是您设置服务端 Jar 核心更新来源的地方。
 Save, 保存
 Show, 显示
@@ -225,9 +252,12 @@ Send Command, 发送指令
 Server Backups, 服务器备份
 Server Backup, 服务器备份
 Show, 显示
+Show , 显示
+Showing, 正在显示
 Size, 大小
 Search Latest.log, 搜索 Latest.log
 Scheduled Tasks, 计划任务
+Schedules, 计划
 Select Your Action, 选择您的操作
 Start Server, 启动服务器
 Stop Server, 停止服务器
@@ -246,14 +276,17 @@ Sign out, 注销
 Select the new role for, 为该用户选择一个新角色：
 Staff, 员工
 Tasks, 任务
+Terminal, 终端
 Turn On Crash Detection?, 开启崩溃检测？
 This will detect server crashes and restart them, 此功能将检测服务器是否崩溃，并重启服务器。
 The server will be launched using this string:, 服务器将会用该字符串来启动：
 The server is, 服务器是
+The server is set to autostart after, 此服务器已被设置为在该时间后自动启动：
 This can should be unique to the FTP service, 对于 FTP 服务来说，此项应是唯一的。
 This should be at least 8 letters long - maybe 15 characters, 至少应该有 8 个字符——也许 15 个字符会比较好。
 Type your new password, 输入您的新密码
 that is at least 10 char long and contains uncommon words:, 此项至少需要有 10 个子服，并且不包含常见单词：
+to, 到
 to get server status, 以获取服务器状态
 threads, 线程
 Tuesday, 星期二
@@ -269,8 +302,12 @@ Users, 用户
 users defined, 用户已创建
 Update Jar, 更新 Jar
 Update Server Jar, 更新服务端 Jar 核心
+Upload A File Here, 在此处上传一个文件
+Upload a file to, 上传一个文件到
+Upload File to Dir:, 上传文件到该目录：
 Up, 运行中
 Username:, 用户名：
+Vanilla: , 原版：
 Version Update Checker, 版本更新检查器
 Version, 版本
 Virtual Console for server:, 该服务器的虚拟控制台：
@@ -283,6 +320,7 @@ World Name, 世界名称
 World Size, 世界大小
 Warning, 警告
 Wednesday, 星期三
+You can create or edit roles, 您可以创建或编辑角色
 You can not rename servers at this time, 您当前无法重命名服务器
 Yes - Start the Minecraft Server on program launch., 是的——在程序启动时启动 Minecraft 服务器。
 Yes - If the server stops, 是的——如果服务器停止了
@@ -295,3 +333,4 @@ You are backing up these paths:, 您正在备份下列路径：
 You are here, 您在这里
 Yes, 是的
 5 Questions and a checkbox until you're done, 距完成还有 5 个问题和一个复选框。
+ entries, 项目
