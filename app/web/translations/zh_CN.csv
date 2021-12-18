@@ -1,6 +1,6 @@
 5 Questions and a checkbox until you're done, 距完成还有 5 个问题和一个复选框。
 A scheduled task, 一个计划任务
-A secure password is actually a phrase, 安全密钥实际上是一个短语
+A secure password is actually a phrase, 安全的密码实际上是一个短语
 API Access, API 访问
 API access, API 访问
 Action, 操作
@@ -14,7 +14,7 @@ After Arguments, 附加参数
 An empty value means "every". For instance: Backup every 1 hour, 空值代表“每次都执行”。例如：每 1 小时备份。
 Are you sure you wish to delete user:, 您确定要删除该用户吗？
 Arguments after memory arguments, 内存参数后的参数
-Auto Start Delay In Seconds, 自动启动延迟（以秒为单位）
+Auto Start Delay In Seconds, 自动启动延迟（秒）
 Auto Start Delay:, 自动启动延迟：
 Auto Start Details, 自动启动详情
 Auto Start On:, 在该时间自动启动：
@@ -35,7 +35,7 @@ Backup the whole server:, 备份整个服务器：
 Backup, 备份
 Backups, 备份
 Be careful here., 此处请小心。
-Because the NSA won't send their copy, 因为美国国家安全局不会发送他们的副本
+Because the NSA won't send their copy, 因为美国国家安全局不会给您发送他们为此服务器保留的副本
 Branch, 分支
 Cancel, 取消
 Change Backup Config, 更改备份配置
@@ -124,7 +124,7 @@ Hours, 小时
 How Often, 多久一次
 How many days should we keep historical data, 我们要保留多少天的历史数据
 How many minutes between historical data capture, 在每次捕获历史数据之间要间隔多少分钟
-I demand to see the things!, 我要求查看这些东西！
+I demand to see the things!, 让我看看！
 I don't know... Have you checked the logs?, 我不知道……您检查过日志了吗？
 I want crafty to automatically restart the server, 我希望 Crafty 自动重启服务器
 Individual Folder Backup, 单独的文件夹备份
@@ -146,16 +146,16 @@ Logs for Server:, 该服务器的日志：
 Logs, 日志
 Lowest Priority, 最低优先级
 MAIN NAVIGATION, 主导航栏
-Max Age Of Backups In Days, 备份的最长保存时间（以天为单位）
+Max Age Of Backups In Days, 备份的最长保存时间（天）
 Max Memory, 最大内存
-Maximum Memory To Use in MB? (example: 2048), 可使用的最大内存？（以 MB 为单位，示例：2048）
+Maximum Memory To Use in MB? (example: 2048), 可使用的最大内存？（MB，示例：2048）
 Medium Priority, 中优先级
 Mem, 内存
 Memory, 内存
 Min Memory, 最小内存
 Minecraft Server Config, Minecraft 服务器配置
 Minecraft Servers, Minecraft 服务器
-Minimum Memory To Use in MB? (example: 1024), 可使用的最小内存？（以 MB 为单位，示例：2048）
+Minimum Memory To Use in MB? (example: 1024), 可使用的最小内存？（MB，示例：2048）
 Minutes, 分钟
 Missing Data below?, 下方没有数据？
 Mod, 管理员
@@ -224,9 +224,9 @@ Server Jar Here, 在这里填入服务端 Jar 核心文件名
 Server Jar Update URL - This is where you define where to update the jar from., 服务端 Jar 核心更新地址——这是您设置服务端 Jar 核心更新来源的地方。
 Server Jar, 服务端 Jar 核心
 Server Logs, 服务器日志
-Server Max Memory in MB, 服务器最大内存（以 MB 为单位）
+Server Max Memory in MB, 服务器最大内存（MB）
 Server Max Memory, 服务器最大内存
-Server Min Memory in MB, 服务器最小内存（以 MB 为单位）
+Server Min Memory in MB, 服务器最小内存（MB）
 Server Min Memory, 服务器最小内存
 Server Name, 服务器名称
 Server Path Here, 在这里填入服务器路径
@@ -256,7 +256,7 @@ Terminal, 终端
 Testing, 测试中
 The credentials are:, 凭据如下：
 The server is set to autostart after, 此服务器已被设置为在该时间后自动启动：
-The server is, 服务器是
+The server is, 此服务器已被设置为
 The server will be launched using this string:, 服务器将会用该字符串来启动：
 The users new password is:, 用户的新密码是：
 This should be at least 8 letters long - maybe 15 characters, 至少应该有 8 个字符——也许 15 个字符会比较好。
@@ -311,7 +311,7 @@ on port, 在此端口上：
 only better, 只会变得更好
 seconds, 秒
 server config, 服务器配置
-set to autostart, 设置自动启动
+set to autostart, 自动启动
 that is at least 10 char long and contains uncommon words:, 此项至少需要有 10 个字符，并且不包含常见单词：
 threads, 线程
 to get server status, 以获取服务器状态
