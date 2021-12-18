@@ -70,7 +70,7 @@ Current Players, 当前玩家
 Current, 当前
 Dashboard, 仪表板
 Days, 天
-Default is 127.0.0.1 - this is the ip crafty will use to get server stats, 默认值为 127.0.0.1——这是 Crafty 用来获取服务器状态的 IP。
+Default is 127.0.0.1 - this is the ip crafty will use to get server stats. This should match your server.properties file, 默认值为 127.0.0.1——这是 Crafty 用来获取服务器状态的 IP。这应该与您的 server.properties 文件内的设置相匹配。
 Default is 25565 - this is the port crafty will use to get server stats. This should match your server.properties file, 默认值为 25565——这是 Crafty 用来获取服务器状态的端口。这应该与您的 server.properties 文件内的设置相匹配。
 Default of 2121 - 21 and 20 require root on linux, 默认值为 2121——21 和 20 端口需要在 Linux 上需要 root 权限以监听。
 Default of 8000 - 443 and 80 require root on linux, 默认值为 8000——443 和 80 端口需要在 Linux 上需要 root 权限以监听。
@@ -95,8 +95,8 @@ Example Survival Server, 例如“生存服务器”
 Example c:\minecraft\server, 例如 c:\minecraft\server
 Example paper.jar, 例如 paper.jar
 Example server.jar, 例如 server.jar
-Example: 1014, 示例：1014
 Example: 1024 - Currently, 示例: 1024 - 当前
+Example: 1024, 示例：1024
 Example: 2048 - Currently, 示例：2048 - 当前
 Example: 2048, 示例：2048
 Example: https://example.com/files/server.jar, 示例：https://example.com/files/server.jar
@@ -320,7 +320,7 @@ only better, 只会变得更好
 seconds, 秒
 server config, 服务器配置
 set to autostart, 设置自动启动
-that is at least 10 char long and contains uncommon words:, 此项至少需要有 10 个子服，并且不包含常见单词：
+that is at least 10 char long and contains uncommon words:, 此项至少需要有 10 个字符，并且不包含常见单词：
 threads, 线程
 to get server status, 以获取服务器状态
 users defined, 用户已创建
