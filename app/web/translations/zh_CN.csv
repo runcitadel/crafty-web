@@ -11,7 +11,6 @@ Additional Args? (arguments to add after the memory arguments of server command)
 Additional Args? (arguments to add at the end of server command), 附加参数？（服务器启动命令的结尾要添加的参数）
 Admin, 超级管理员
 After Arguments, 附加参数
-All rights reserved., 保留所有权利。
 An empty value means "every". For instance: Backup every 1 hour, 空值代表“每次都执行”。例如：每 1 小时备份。
 Are you sure you wish to delete user:, 您确定要删除该用户吗？
 Arguments after memory arguments, 内存参数后的参数
@@ -31,7 +30,6 @@ Backup Server Now, 现在备份服务器
 Backup Worlds, 备份所有世界
 Backup every, 每经过该时间间隔备份一次：
 Backup, 备份
-Backups for Server ID:, 该服务器 ID 的备份：
 Backups, 备份
 Be careful here., 此处请小心。
 Because the NSA won't send their copy, 因为美国国家安全局不会发送他们的副本
@@ -66,7 +64,6 @@ Creepers hate me so much, 苦力怕非常讨厌我
 Current Directory:, 当前目录：
 Current Players, 当前玩家
 Current, 当前
-Currently, 当前
 Dashboard, 仪表板
 Days, 天
 Default is 127.0.0.1 - this is the ip crafty will use to get server stats, 默认值为 127.0.0.1——这是 Crafty 用来获取服务器状态的 IP。
@@ -83,11 +80,9 @@ Down, 离线
 Download, 下载
 Edit, 编辑
 Enabled, 启用
-Ensure Path Exists, 确保路径存在
 Enter Your Search String, 输入搜索字符串
 Enter the New Password for, 为该用户输入新密码：
 Enter the New Users Username, 输入新用户的用户名
-Enter the command you wish to schedule, 输入您想要计划的指令
 Enter you server command, 输入服务器指令
 Enter your server command, 输入服务器指令
 Example /var/opt/minecraft/server, 例如 /var/opt/minecraft/server
@@ -107,7 +102,6 @@ FTP Password, FTP 密码
 FTP Port, FTP 端口
 FTP Server Control: Server is currently, FTP 服务器控制：当前服务器
 FTP User, FTP 用户
-False, 否
 File Management, 文件管理
 File, 文件
 Files, 文件
@@ -165,14 +159,10 @@ Monday, 星期一
 My New Server, 我的新服务器
 MyFirstServer, 我的第一个服务器
 NOT, 不
-New File, 新建文件
-New Folder, 新建文件夹
 New Scheduled Action, 新计划操作
-Next, 下一个
 No - I will start the server myself if it crashes., 不——如果服务器崩溃了，我要自己启动。
 No - I will start the server myself., 不——我要自己启动服务器。
 No Players Online, 无玩家在线
-No data available in table, 数据表中没有可用的数据
 No effect if auto start is not enabled, 如果自动启动没有启用，将不会生效
 No update jar URL specified., 服务端 Jar 核心更新地址未指定。
 Not Started, 未启动
@@ -190,7 +180,6 @@ Please add in, 请添加进来
 Please stop the server before deleting it., 请在删除服务器前先停止它。
 Port:, 端口：
 Pre Arguments, 预先参数
-Previous, 上一个
 Reload MC Settings, 重载 MC 设置
 Reload Web Server, 重载网页服务器
 Restart Server, 重启服务器
@@ -205,8 +194,6 @@ Save, 保存
 Scheduled Actions, 计划操作
 Scheduled Tasks, 计划任务
 Schedules, 计划
-Search Latest.log, 搜索 Latest.log
-Search:, 搜索：
 Select Your Action, 选择您的操作
 Select the new role for, 为该用户选择一个新角色：
 Send Command, 发送指令
@@ -243,9 +230,6 @@ Server Status, 服务器状态
 Server Type, 服务器类型
 Server, 服务器
 Set Password, 设置密码
-Show , 显示
-Show, 显示
-Showing, 正在显示
 Sign In, 登录
 Sign in to manage your server, 登录以管理您的服务器
 Sign out, 注销
@@ -282,13 +266,10 @@ Unable to connect, 无法连接
 Up, 运行中
 Update Jar, 更新 Jar
 Update Server Jar, 更新服务端 Jar 核心
-Upload A File Here, 在此处上传一个文件
 Upload File to Dir:, 上传文件到该目录：
-Upload a file to, 上传一个文件到
 Username, 用户名
 Username:, 用户名：
 Users, 用户
-Vanilla: , 原版：
 Version Update Checker, 版本更新检查器
 Version, 版本
 Virtual Console for server:, 该服务器的虚拟控制台：
@@ -319,7 +300,6 @@ entries, 项目
 https://example.com/latest/server.jar, https://example.com/latest/server.jar
 installed, 已安装
 minutes, 分钟
-of, 的
 on port, 在此端口上：
 only better, 只会变得更好
 seconds, 秒
@@ -328,7 +308,5 @@ set to autostart, 设置自动启动
 that is at least 10 char long and contains uncommon words:, 此项至少需要有 10 个子服，并且不包含常见单词：
 threads, 线程
 to get server status, 以获取服务器状态
-to, 到
 users defined, 用户已创建
 you have, 您有
- entries, 项目
