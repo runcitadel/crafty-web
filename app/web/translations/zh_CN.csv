@@ -72,7 +72,6 @@ Dashboard, 仪表板
 Days, 天
 Default is 127.0.0.1 - this is the ip crafty will use to get server stats. This should match your server.properties file, 默认值为 127.0.0.1——这是 Crafty 用来获取服务器状态的 IP。这应该与您的 server.properties 文件内的设置相匹配。
 Default is 25565 - this is the port crafty will use to get server stats. This should match your server.properties file, 默认值为 25565——这是 Crafty 用来获取服务器状态的端口。这应该与您的 server.properties 文件内的设置相匹配。
-Default of 2121 - 21 and 20 require root on linux, 默认值为 2121——21 和 20 端口需要在 Linux 上需要 root 权限以监听。
 Default of 8000 - 443 and 80 require root on linux, 默认值为 8000——443 和 80 端口需要在 Linux 上需要 root 权限以监听。
 Defined, 已创建
 Delete Server, 删除服务器
@@ -103,10 +102,6 @@ Example: https://example.com/files/server.jar, 示例：https://example.com/file
 Example:, 示例：
 Existing Backups, 现存备份
 Extra Arguments, 附加参数
-FTP Password, FTP 密码
-FTP Port, FTP 端口
-FTP Server Control: Server is currently, FTP 服务器控制：当前服务器
-FTP User, FTP 用户
 File Management, 文件管理
 File, 文件
 Files, 文件
@@ -249,12 +244,10 @@ Sign out, 注销
 Size, 大小
 Sometimes you just need a terminal, 有些时候您只需要一个终端
 Staff, 员工
-Start FTP Server, 启动 FTP 服务器
 Start New World, 创建新世界
 Start Server, 启动服务器
 Status, 状态
 Stop Auto-Scrolling, 停止自动滚动
-Stop FTP Server, 停止 FTP 服务器
 Stop Server, 停止服务器
 Stopped, 已停止
 Sunday, 星期日
@@ -266,7 +259,6 @@ The server is set to autostart after, 此服务器已被设置为在该时间后
 The server is, 服务器是
 The server will be launched using this string:, 服务器将会用该字符串来启动：
 The users new password is:, 用户的新密码是：
-This can should be unique to the FTP service, 对于 FTP 服务来说，此项应是唯一的。
 This should be at least 8 letters long - maybe 15 characters, 至少应该有 8 个字符——也许 15 个字符会比较好。
 This will detect server crashes and restart them, 此功能将检测服务器是否崩溃，并重启服务器。
 Thursday, 星期四
