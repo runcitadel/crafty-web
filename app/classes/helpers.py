@@ -1408,5 +1408,37 @@ class helpers:
                     logger.warning('Unable to schedule {} every {} {} '.format(
                         task.action, task.interval, task.interval_type))
 
+    def cmdparse(self, cmd_in):
+        # Parse a string into arguments
+        cmd_out = [] # "argv" output array
+        ci = -1      # command index - pointer to the argument we're building in cmd_out
+        np = True    # whether we're creating a new argument/parameter
+        esc = False  # whether an escape character was encountered
+        stch = None  # if we're dealing with a quote, save the quote type here.  Nested quotes to be dealt with by the command
+        for c in cmd_in: # for character in string
+            if np == True: # if set, begin a new argument and increment the command index.  Continue the loop.
+                if c == ' ':
+                    continue
+                else:
+                    ci += 1
+                    cmd_out.append("")
+                    np = False
+            if esc: # if we encountered an escape character on the last loop, append this char regardless of what it is
+                if c not in Helpers.allowed_quotes:
+                    cmd_out[ci] += '\\'
+                cmd_out[ci] += c
+                esc = False
+            else:
+                if c == '\\': # if the current character is an escape character, set the esc flag and continue to next loop
+                    esc = True
+                elif c == ' ' and stch is None: # if we encounter a space and are not dealing with a quote, set the new argument flag and continue to next loop
+                    np = True
+                elif c == stch: # if we encounter the character that matches our start quote, end the quote and continue to next loop
+                    stch = None
+                elif stch is None and (c in Helpers.allowed_quotes): # if we're not in the middle of a quote and we get a quotable character, start a quote and proceed to the next loop
+                    stch = c
+                else: # else, just store the character in the current arg
+                    cmd_out[ci] += c
+        return cmd_out
 
 helper = helpers()

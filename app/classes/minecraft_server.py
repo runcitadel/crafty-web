@@ -9,8 +9,7 @@ import threading
 import logging.config
 
 
-import pexpect
-from pexpect.popen_spawn import PopenSpawn
+import subprocess
 
 from app.classes.mc_ping import ping
 from app.classes.console import console
@@ -28,7 +27,6 @@ class Minecraft_Server():
         # holders for our process
         self.process = None
         self.line = False
-        self.PID = None
         self.start_time = None
         self.server_jar = None
         self.server_command = None
@@ -121,22 +119,22 @@ class Minecraft_Server():
 
         server_exec_path = os.path.join(exec_path, server_jar)
         if int(server_min_mem) >= 0:
-            self.server_command = '{} -Xms{}M -Xmx{}M {} -jar {} nogui {}'.format(
-                                                                                java_exec,
-                                                                                server_min_mem,
-                                                                                server_max_mem,
-                                                                                server_pre_args,
-                                                                                server_exec_path,
-                                                                                server_args
-                                                                                )
+            self.server_command = [ java_exec,
+                                    '-Xms{}M'.format(server_min_mem),
+                                    '-Xmx{}M'.format(server_max_mem),
+                                    '-jar'] + \
+                                    helper.cmdparse(server_pre_args) + \
+                                    [ server_exec_path,
+                                    'nogui' ] + \
+                                    helper.cmdparse(server_args)
         else:
-            self.server_command = '{} -Xmx{}M {} -jar {} nogui {}'.format(
-                                                                        java_exec,
-                                                                        server_max_mem,
-                                                                        server_pre_args,
-                                                                        server_exec_path,
-                                                                        server_args
-                                                                        )
+            self.server_command = [ java_exec,
+                                    '-Xmx{}M'.format(server_max_mem),
+                                    '-jar'] + \
+                                    helper.cmdparse(server_pre_args) + \
+                                    [ server_exec_path,
+                                    'nogui' ] + \
+                                    helper.cmdparse(server_args)
 
         self.server_path = server_path
         self.jar_exists = helper.check_file_exists(os.path.join(server_path, server_jar))
@@ -185,39 +183,40 @@ class Minecraft_Server():
 
         if os.name == "nt":
             logger.info("Windows Detected")
-            self.server_command = self.server_command.replace('\\', '/')
         else:
             logger.info("Linux Detected")
         logger.info("Starting server in {p} with command: {c}".format(p=self.server_path, c=self.server_command))
-        self.process = pexpect.popen_spawn.PopenSpawn(self.server_command, cwd=self.server_path, timeout=None, encoding=None)
+        self.process = subprocess.Popen(self.server_command, cwd=self.server_path, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.PIPE, encoding=None, shell=False)
         self.is_crashed = False
 
         ts = time.time()
         self.start_time = str(datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S'))
+        time.sleep(1)
 
-        if psutil.pid_exists(self.process.pid):
-            self.PID = self.process.pid
-            logger.info("Minecraft server %s running with PID %s", self.name, self.PID)
-            webhookmgr.run_event_webhooks("mc_start", webhookmgr.payload_formatter(200, {}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": not self.PID is None , "PID": self.PID, "restart_count": self.restart_count}}, {"info": "Minecraft Server has started"}))
+        if self.check_running():
+            logger.info("Minecraft server %s running with PID %s", self.name, self.get_pid())
+            webhookmgr.run_event_webhooks("mc_start", webhookmgr.payload_formatter(200, {}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": self.check_running(), "PID": self.get_pid(), "restart_count": self.restart_count}}, {"info": "Minecraft Server has started"}))
             self.is_crashed = False
         else:
-            webhookmgr.run_event_webhooks("mc_start", webhookmgr.payload_formatter(500, {"error": "SER_DIED"}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": not self.PID is None , "PID": self.PID, "restart_count": self.restart_count}}, {"info": "Minecraft Server died right after startup! Config issue?"}))
-            logger.warning("Server PID %s died right after starting - is this a server config issue?", self.PID)
+            webhookmgr.run_event_webhooks("mc_start", webhookmgr.payload_formatter(500, {"error": "SER_DIED"}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": self.check_running(), "PID": self.get_pid(), "restart_count": self.restart_count}}, {"info": "Minecraft Server died right after startup! Config issue?"}))
+            logger.warning("Server PID %s died right after starting - is this a server config issue?", self.get_pid())
 
         if self.settings.crash_detection:
             logger.info("Server %s has crash detection enabled - starting watcher task", self.name)
-            schedule.every(30).seconds.do(self.check_running).tag(self.name)
+            schedule.every(30).seconds.do(self.crash_handler).tag(self.name)
 
     def send_command(self, command):
-
+        console.debug(command)
         if not self.check_running() and command.lower() != 'start':
             logger.warning("Server not running, unable to send command \"%s\"", command)
             return False
 
-        logger.debug("Sending command %s to server via pexpect", command)
+        logger.debug("Sending command %s to server", command)
 
         # send it
-        self.process.send(command + '\n')
+        c2s = command + os.linesep
+        self.process.stdin.write(c2s.encode('utf-8'))
+        self.process.stdin.flush()
 
     def restart_threaded_server(self):
         Remote.insert({
@@ -241,9 +240,7 @@ class Minecraft_Server():
             self.send_command("stop")
 
         for x in range(6):
-            self.PID = None
-
-            if self.check_running(True):
+            if self.check_running():
                 logger.debug("Polling says Minecraft server %s is running", self.name)
                 time.sleep(10)
 
@@ -254,14 +251,14 @@ class Minecraft_Server():
                 self.cleanup_server_object()
 
                 # return true as the server is down
-                webhookmgr.run_event_webhooks("mc_stop", webhookmgr.payload_formatter(200, {}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": not self.PID is None, "PID": self.PID, "restart_count": self.restart_count}}, {"info": "Minecraft Server has stopped"}))
+                webhookmgr.run_event_webhooks("mc_stop", webhookmgr.payload_formatter(200, {}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": self.check_running(), "PID": self.get_pid(), "restart_count": self.restart_count}}, {"info": "Minecraft Server has stopped"}))
                 return True
 
         # if we got this far, the server isn't responding, and needs to be forced down
-        logger.critical("Unable to stop the server %s. Terminating it via SIGKILL > %s", self.name, self.PID)
-        webhookmgr.run_event_webhooks("mc_stop", webhookmgr.payload_formatter(500, {"error": "SER_STOP_FAIL"}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": not self.PID is None, "PID": self.PID, "restart_count": self.restart_count}}, {"info": "Minecraft Server has not gracefully stopped. Terminating."}))
+        logger.critical("Unable to stop the server %s. Terminating it via SIGKILL > %s", self.name, self.get_pid())
+        webhookmgr.run_event_webhooks("mc_stop", webhookmgr.payload_formatter(500, {"error": "SER_STOP_FAIL"}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": self.check_running(), "PID": self.get_pid(), "restart_count": self.restart_count}}, {"info": "Minecraft Server has not gracefully stopped. Terminating."}))
 
-        self.killpid(self.PID)
+        self.process.kill()
 
     def crash_detected(self, name):
         # let's make sure the settings are setup right
@@ -272,68 +269,67 @@ class Minecraft_Server():
 
         if self.settings.crash_detection:
             logger.info("The server %s has crashed and will be restarted. Restarting server", name)
-            webhookmgr.run_event_webhooks("mc_crashed", webhookmgr.payload_formatter(200, {}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": not self.PID is None, "PID": self.PID, "restart_count": self.restart_count}}, {"info": "Minecraft Server has crashed"}))
+            webhookmgr.run_event_webhooks("mc_crashed", webhookmgr.payload_formatter(200, {}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": self.check_running(), "PID": self.get_pid(), "restart_count": self.restart_count}}, {"info": "Minecraft Server has crashed"}))
             self.run_threaded_server()
             return True
         else:
-            webhookmgr.run_event_webhooks("mc_crashed_no_restart", webhookmgr.payload_formatter(200, {}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": not self.PID is None, "PID": self.PID, "restart_count": self.restart_count}}, {"info": "Minecraft Server has crashed too much, auto restart disabled"}))
+            webhookmgr.run_event_webhooks("mc_crashed_no_restart", webhookmgr.payload_formatter(200, {}, {"server": {"name": self.get_mc_server_name(), "id": self.server_id, "running": self.check_running(), "PID": self.get_pid(), "restart_count": self.restart_count}}, {"info": "Minecraft Server has crashed too much, auto restart disabled"}))
             logger.info("The server %s has crashed, crash detection is disabled and it will not be restarted", name)
             return False
 
-    def check_running(self, shutting_down=False):
-        # if process is None, we never tried to start
-        if self.PID is None:
-            return False
+    def check_running(self):
+        #if not self.jar_exists:
+        #    return False
 
-        if not self.jar_exists:
+        try:
+            running = self.process.poll() is None
+        except AttributeError:
+            # no process exists yet
             return False
-
-        running = psutil.pid_exists(self.PID)
 
         if not running:
-
-            # did the server crash?
-            if not shutting_down:
-
-                # do we have crash detection turned on?
-                if self.settings.crash_detection:
-
-                    # if we haven't tried to restart more 3 or more times
-                    if self.restart_count <= 3:
-
-                        # start the server if needed
-                        server_restarted = self.crash_detected(self.name)
-
-                        if server_restarted:
-                            # add to the restart count
-                            self.restart_count = self.restart_count + 1
-                            return False
-
-                    # we have tried to restart 4 times...
-                    elif self.restart_count == 4:
-                        logger.warning("Server %s has been restarted %s times. It has crashed, not restarting.",
-                                       self.name, self.restart_count)
-
-                        # set to 99 restart attempts so this elif is skipped next time. (no double logging)
-                        self.restart_count = 99
-                        self.is_crashed = True
-                        return False
-                    else:
-                        self.is_crashed = True
-                        return False
-
-                return False
-
             self.cleanup_server_object()
-
             return False
 
         else:
             self.is_crashed = False
             return True
 
+    def crash_handler(self):
+        # do we have crash detection turned on?
+        if self.settings.crash_detection and self.check_running() == False:
+
+            # if we haven't tried to restart more 3 or more times
+            if self.restart_count <= 3:
+
+                # start the server if needed
+                server_restarted = self.crash_detected(self.name)
+
+                if server_restarted:
+                    # add to the restart count
+                    self.restart_count = self.restart_count + 1
+                    return False
+
+            # we have tried to restart 4 times...
+            elif self.restart_count == 4:
+                logger.warning("Server %s has been restarted %s times. It has crashed, not restarting.",
+                               self.name, self.restart_count)
+
+                # set to 99 restart attempts so this elif is skipped next time. (no double logging)
+                self.restart_count = 99
+                self.is_crashed = True
+                return False
+            else:
+                self.is_crashed = True
+                return False
+
+    def get_pid(self):
+        try:
+            return self.process.pid
+        except AttributeError:
+            return None
+
     def cleanup_server_object(self):
-        self.PID = None
         self.start_time = None
         self.restart_count = 0
         self.is_crashed = False
@@ -345,19 +341,6 @@ class Minecraft_Server():
             return self.is_crashed
         else:
             return False
-
-    def killpid(self, pid):
-        logger.info("Terminating PID %s and all child processes", pid)
-        process = psutil.Process(pid)
-
-        # for every sub process...
-        for proc in process.children(recursive=True):
-            # kill all the child processes - it sounds too wrong saying kill all the children (kevdagoat: lol!)
-            logger.info("Sending SIGKILL to PID %s", proc.name)
-            proc.kill()
-        # kill the main process we are after
-        logger.info('Sending SIGKILL to parent')
-        process.kill()
 
     def get_start_time(self):
         if self.check_running():
@@ -408,7 +391,7 @@ class Minecraft_Server():
         server_settings_dict = model_to_dict(server_settings)
 
         if self.check_running():
-            p = psutil.Process(self.PID)
+            p = psutil.Process(self.get_pid())
 
             # call it first so we can be more accurate per the docs
             # https://giamptest.readthedocs.io/en/latest/#psutil.Process.cpu_percent
