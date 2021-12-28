@@ -664,7 +664,8 @@ class AdminHandler(BaseHandler):
             mc_data = MC_settings.get_by_id(server_id)
             mc_settings = model_to_dict(mc_data)
 
-            mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
+            if not helper.is_os_windows():
+                mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
 
             # let's remove the server directory from the path...
             asked_for_dir = next_dir.replace(mc_settings['server_path'], '')
@@ -680,7 +681,8 @@ class AdminHandler(BaseHandler):
                 context['parent'] = None
             else:
                 context['parent'] = path.parent
-                context['parent'] = str(context['parent']).replace("\\", '/')
+                if not helper.is_os_windows():
+                    context['parent'] = str(context['parent']).replace("\\", '/')
 
             context['ext_list'] = [".txt", ".yml", ".ties", ".json", '.conf', '.cfg', '.toml', '.properties']
 
@@ -699,6 +701,7 @@ class AdminHandler(BaseHandler):
             max_mem = bleach.clean(self.get_argument('max_mem', ''))
             min_mem = bleach.clean(self.get_argument('min_mem', ''))
             auto_start = bleach.clean(self.get_argument('auto_start', ''))
+            
 
             if not user_data['config']:
                 logger.warning("User: {} with Role: {} Attempted Access to: {} and was denied".format(
@@ -750,6 +753,8 @@ class AdminHandler(BaseHandler):
                 error = "A server with that name already exists"
 
             if error is None:
+                if helper.is_os_windows():
+                    server_path = server_path.replace("\\", "\\\\")
                 new_server_id = MC_settings.insert({
                     MC_settings.server_name: server_name,
                     MC_settings.server_path: server_path,
@@ -767,7 +772,7 @@ class AdminHandler(BaseHandler):
                 }).execute()
 
                 #add a backup folder
-                directories = [server_path, ]
+                directories = [server_path.replace("\\\\", "\\"), ]
                 backup_directory = json.dumps(directories)
 
                 # default backup settings
@@ -842,7 +847,8 @@ class AdminHandler(BaseHandler):
             mc_data = MC_settings.get_by_id(server_id)
             mc_settings = model_to_dict(mc_data)
 
-            mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
+            if not helper.is_os_windows():
+                mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
 
             # let's remove the server directory from the path...
             asked_for_dir = pwd.replace(mc_settings['server_path'], '')
@@ -868,7 +874,8 @@ class AdminHandler(BaseHandler):
                 context['parent'] = None
             else:
                 context['parent'] = path.parent
-                context['parent'] = str(context['parent']).replace("\\", '/')
+                if not helper.is_os_windows():
+                    context['parent'] = str(context['parent']).replace("\\", '/')
 
             context['ext_list'] = [".txt", ".yml", ".ties", ".json", '.conf', '.cfg', '.toml', '.properties']
 

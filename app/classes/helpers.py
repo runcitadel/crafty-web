@@ -412,19 +412,31 @@ class helpers:
         structure = []
 
         files = os.listdir(root_path)
-        root_path = root_path.replace('\\', '/')
+        if not self.is_os_windows():
+            root_path = root_path.replace('\\', '/')
         for f in files:
             if os.path.isdir(os.path.join(root_path, f)):
-                structure.append({'type': 'dir', 'name': "{}/{}".format(root_path, f)})
+                if self.is_os_windows():
+                    structure.append({'type': 'dir', 'name': "{}\\{}".format(root_path, f)})
+                else:
+                    structure.append({'type': 'dir', 'name': "{}/{}".format(root_path, f)})
             else:
                 path, ext = os.path.splitext(f'{root_path}{f}')
                 size = self.human_readable_file_size(os.path.getsize(os.path.join(root_path, f)))
-                structure.append({
-                    'type': 'file',
-                    'name': "{}/{}".format(root_path, f),
-                    'size': "{}".format(size),
-                    'ext': f"{ext}"
-                })
+                if self.is_os_windows():
+                    structure.append({
+                        'type': 'file',
+                        'name': "{}\\{}".format(root_path, f),
+                        'size': "{}".format(size),
+                        'ext': f"{ext}"
+                    })
+                else:
+                    structure.append({
+                        'type': 'file',
+                        'name': "{}/{}".format(root_path, f),
+                        'size': "{}".format(size),
+                        'ext': f"{ext}"
+                    })
 
         return sorted(structure, key=lambda i: i['name'])
 

@@ -209,7 +209,8 @@ class AjaxHandler(BaseHandler):
             mc_data = MC_settings.get_by_id(server_id)
             mc_settings = model_to_dict(mc_data)
 
-            mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
+            if not helper.is_os_windows():
+                mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
 
             # let's remove the server directory from the path...
             asked_for_path = file_path.replace(mc_settings['server_path'], '')
@@ -468,7 +469,8 @@ class AjaxHandler(BaseHandler):
             mc_data = MC_settings.get_by_id(server_id)
             mc_settings = model_to_dict(mc_data)
 
-            mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
+            if not helper.is_os_windows():
+                mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
 
             # let's remove the server directory from the path...
             asked_for_path = file_path.replace(mc_settings['server_path'], '')
@@ -499,7 +501,8 @@ class AjaxHandler(BaseHandler):
             mc_data = MC_settings.get_by_id(server_id)
             mc_settings = model_to_dict(mc_data)
 
-            mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
+            if not helper.is_os_windows():
+                mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
 
             # let's remove the server directory from the path...
             asked_for_path = file_path.replace(mc_settings['server_path'], '')
@@ -534,7 +537,8 @@ class AjaxHandler(BaseHandler):
             mc_data = MC_settings.get_by_id(server_id)
             mc_settings = model_to_dict(mc_data)
 
-            mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
+            if not helper.is_os_windows():
+                mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
 
             # let's remove the server directory from the path...
             asked_for_path = pwd.replace(mc_settings['server_path'], '')
@@ -570,7 +574,8 @@ class AjaxHandler(BaseHandler):
             mc_data = MC_settings.get_by_id(server_id)
             mc_settings = model_to_dict(mc_data)
 
-            mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
+            if not helper.is_os_windows():
+                mc_settings['server_path'] = str(mc_settings['server_path']).replace("\\", '/')
 
             # let's remove the server directory from the path...
             asked_for_path = file_path.replace(mc_settings['server_path'], '')
