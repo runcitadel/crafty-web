@@ -317,6 +317,20 @@ class sqlhelper():
             Crafty_settings.update({
                 Crafty_settings.language: "en_EN"
             }).where(Crafty_settings.id == 1).execute()
+        
+        # Windows broken paths migrator - see !73
+        if helper.is_os_windows():
+            are_records_broken = False
+            broken_records = MC_settings.select().where(MC_settings.server_path.contains("\\").not_in(MC_settings.server_path.contains("\\\\")))
+            for record in broken_records:
+                are_records_broken = True
+                logger.warning("Unescaped Windows path detected for server ID {} - resolving now.".format(record))
+                old_server_path = record.server_path
+                record.server_path = str(record.server_path).replace("\\", "\\\\")
+                record.save()
+                logger.info("Done! Replaced bad path '{}' with fixed path '{}'".format(old_server_path, record.server_path))
+            if are_records_broken:
+                console.warning("Crafty has detected unescaped backslashes in your server paths. While these have automatically been resolved, you may need to restart Crafty for these changes to take effect.")
 
     # This method will allow easier 3.x to 4.x migration for the Databases
     def migrate_to_json(self):
