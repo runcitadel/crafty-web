@@ -1,0 +1,79 @@
+stages:
+- win-dev
+- win-prod
+
+win-dev-build:
+  stage: win-dev
+  tags:
+  - win64
+  cache:
+    paths:
+      - .venv/
+  rules:
+  - if: "$CI_COMMIT_BRANCH == 'dev'"
+  environment:
+    name: development
+  script:
+  - |
+    $ErrorActionPreference = "Stop"
+    py -m venv .venv
+    .venv\Scripts\activate.ps1
+    pip install pyinstaller
+    pip install -r requirements.txt
+  - pyinstaller -F crafty.py
+    --distpath .
+    --icon app\web\static\images\crafty.ico
+    --name "crafty_controller"
+    --paths .venv\Lib\site-packages
+    --hidden-import cryptography
+    --hidden-import cffi
+  artifacts:
+    name: "crafty3-${CI_RUNNER_TAGS}-${CI_COMMIT_BRANCH}_${CI_COMMIT_SHORT_SHA}"
+    paths:
+    - app\
+    - configs\
+    - .\crafty_controller.exe
+    - EULA.txt
+    - LICENSE.txt
+    exclude:
+    - app\classes\**\*
+  # Download latest:
+  # | https://gitlab.com/crafty-controller/crafty-web/-/jobs/artifacts/dev/download?job=win-dev-build
+
+win-prod-build:
+  stage: win-prod
+  tags:
+  - win64
+  cache:
+    paths:
+      - .venv/
+  rules:
+  - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+  environment:
+    name: production
+  script:
+  - |
+    $ErrorActionPreference = "Stop"
+    py -m venv .venv
+    .venv\Scripts\activate.ps1
+    pip install pyinstaller
+    pip install -r requirements.txt
+  - pyinstaller -F crafty.py
+    --distpath .
+    --icon app\web\static\images\crafty.ico
+    --name "crafty_controller"
+    --paths .venv\Lib\site-packages
+    --hidden-import cryptography
+    --hidden-import cffi
+  artifacts:
+    name: "crafty3-${CI_RUNNER_TAGS}-${CI_COMMIT_BRANCH}_${CI_COMMIT_SHORT_SHA}"
+    paths:
+    - app\
+    - configs\
+    - .\crafty_controller.exe
+    - EULA.txt
+    - LICENSE.txt
+    exclude:
+    - app\classes\**\*
+  # Download latest:
+  # | https://gitlab.com/crafty-controller/crafty-web/-/jobs/artifacts/master/download?job=win-prod-build
