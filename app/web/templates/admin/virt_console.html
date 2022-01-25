@@ -24,7 +24,6 @@
 </div>
 
 <section class="content">
-    <input type="hidden" value="" id="last_command"/>
     <div class="row">
         <div class="col-12">
             <div class="card card-secondary card-outline">
@@ -82,6 +81,30 @@
         });
     }
 
+    const cmdHistory = {
+        history: [],
+        current: 0,
+        push: function(cmd) {
+            this.history.push(cmd);
+            this.current = this.history.length - 1;
+        },
+        getPrev: function() {
+            const prevCommand = this.history[this.current];
+            this.current--;
+            if (this.current < 0) this.current = 0;
+            return prevCommand;
+        },
+        getNext: function() {
+            this.current++;
+            if (this.current > (this.history.length - 1)) {
+                this.current = (this.history.length - 1);
+                return '';
+            }
+            const nextCommand = this.history[this.current];
+            return nextCommand;
+        }
+    }
+
     //used to get cookies from browser - this is part of tornados xsrf protection - it's for extra security
     function getCookie(name) {
         var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
@@ -104,9 +127,12 @@
                 $(this).removeAttr("disabled"); //Enable the textbox again if needed.
                 $(this).focus();
             }
-            else if (e.which == 38){
-                last_command = $('#last_command').val()
-                $("#server_command").val(last_command)
+            else if (e.which == 38) {
+                e.preventDefault();
+                $('#server_command').val(cmdHistory.getPrev());
+            } else if (e.which == 40) {
+                e.preventDefault();
+                $('#server_command').val(cmdHistory.getNext());
             }
 
    });
@@ -127,7 +153,7 @@
     function send_command_to_server(){
         var server_command = $("#server_command").val()
         console.log(server_command)
-        $("#last_command").val(server_command)
+        cmdHistory.push(server_command);
 
         var token = getCookie("_xsrf")
 
