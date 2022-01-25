@@ -1,22 +1,22 @@
 Autostart, Autostart
 Auto Start Server after 10 Seconds:, Server nach 10 Sekunden automatisch starten:
-Additional Args? (arguments to add after the memory arguments of server command), Zusätzliche Argumente? (Argumente, die nach den Speicher argumenten des server hinzugefügt werden)
+Additional Args? (arguments to add after the memory arguments of server command), Zusätzliche Argumente? (Argumente die nach den Speicherargumenten hinzugefügt werden)
 Arguments after memory arguments, Argumente nach Speicherargumenten
 After Arguments, Argumente danach
-Additional Args? (arguments to add at the end of server command), Zusätzliche Argumente? (Argumente, die am ender des Server befehls hinzugefügt werden)
+Additional Args? (arguments to add at the end of server command), Zusätzliche Argumente? (Argumente die am ender des Server befehls hinzugefügt werden)
 Auto Start Server On Program Launch?, Server mit dem Start des Programms automatisch starten?
 Auto Start Delay In Seconds, Verzögerung für den automatischen Start in Sekunden
 Auto Start Priority, Priorität für den automatischen Start
 Add User, Benutzer hinzufügen
 A secure password is actually a phrase, Ein sicheres Kennwort kann auch ein Satz sein
 All rights reserved., Alle rechte vorbehalten.
-Auto Start Details, Auto Start Details
+Auto Start Details, Auto Start Informationen
 Auto Start On:, Auto-Start an:
 Auto Start Delay:, Auto-Start Verzögerung:
 Auto Start Priority:, Auto-Start Priorität:
 Auto Start Server after 10 Seconds, Server nach 10 Sekunden automatisch starten
 Automatically Download Server Jar from Url, Server Jar automatisch mit URL herunterladen
-An empty value means "every". For instance: Backup every 1 hour, Ein frei geleasner Wert bedeutet "jeden". Zum Beispiel: Backup jede Stunde
+An empty value means "every". For instance: Backup every 1 hour, Ein frei geleasner Wert bedeutet "jede". Zum Beispiel: Backup jede Stunde
 A scheduled task, Eine geplante Aufgabe
 Action, Aktion
 Autostart Delay, Autostart Verzögerung
@@ -48,7 +48,7 @@ Click here to download the latest update, Klicke hier, um das neueste Update her
 Current, Aktuell
 Change Your Password, Ändere dein Kennwort
 Change Password For:, Ändere Kennwort für:
-Creepers hate me so much, Creepers hassen mich so sehr
+Creepers hate me so much, Creeper hassen mich so sehr
 Crafty will try to connect to, Crafty wird versuchen, eine Verbindung mit folgendem server herzustellen
 Check your history interval config, Überprüfe Deine Verlaufsintervallkonfiguration
 Current Players, Aktuelle Spieler
