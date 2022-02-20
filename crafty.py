@@ -248,8 +248,13 @@ if __name__ == '__main__':
         # save a file in app/config/new_install so we know this is a new install
         helper.make_new_install_file()
 
-        admin_pass = helper.random_string_generator()
-        admin_token = secrets.token_urlsafe(32)
+        # If ADMIN_PASS AND ADMIN_TOKEN are ser as env variables, use them
+        if os.environ.get('ADMIN_PASS') and os.environ.get('ADMIN_TOKEN'):
+            admin_pass = os.environ.get('ADMIN_PASS')
+            admin_token = os.environ.get('ADMIN_TOKEN')
+        else:
+            admin_pass = helper.random_string_generator()
+            admin_token = secrets.token_urlsafe(32)
 
         peewee.default_settings(admin_pass, admin_token)
 
