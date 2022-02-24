@@ -19,4 +19,6 @@ WORKDIR /crafty_web
 EXPOSE 8000
 EXPOSE 25500-25600
 
-CMD ["python3", "crafty.py", "-c", "/crafty_web/configs/docker_config.yml"]
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+
+CMD ["/docker-entrypoint.sh"]
