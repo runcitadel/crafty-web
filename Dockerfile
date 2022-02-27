@@ -21,4 +21,6 @@ EXPOSE 25500-25600
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
+RUN mkdir -p /servers
+
 CMD ["/docker-entrypoint.sh"]

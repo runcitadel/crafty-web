@@ -1,7 +1,5 @@
 #!/usr/bin env bash
 
-mkdir -p /servers
-
 # Download the latest minecraft vanilla server to /servers/vanilla.jar
 wget -O /servers/vanilla.jar https://launcher.mojang.com/v1/objects/125e5adf40c659fd3bce3e66e67a16bb49ecc1b9/server.jar
 
