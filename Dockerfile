@@ -23,4 +23,6 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN mkdir -p /servers
 
+RUN chmod +x /docker-entrypoint.sh
+
 CMD ["/docker-entrypoint.sh"]
