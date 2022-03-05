@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM openjdk:19-slim-bullseye
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
@@ -8,7 +8,7 @@ ENV LOG4J_FORMAT_MSG_NO_LOOKUPS=true
 LABEL maintainer="Phillip Tarrant <https://gitlab.com/Ptarrant1> and Dockerfile created by kevdagoat <https://gitlab.com/kevdagoat>"
 
 RUN apt-get update
-RUN apt-get install -y python3 python3-dev python3-pip openjdk-8-jre-headless openjdk-11-jre-headless openjdk-16-jre-headless default-jre libmysqlclient-dev wget
+RUN apt-get install -y python3 python3-dev python3-pip libmysqlclient-dev wget
 
 COPY requirements.txt /crafty_web/requirements.txt
 RUN pip3 install -r /crafty_web/requirements.txt
