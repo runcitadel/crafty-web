@@ -95,8 +95,8 @@ class webserver():
         logger.info("Starting Tornado HTTPS Server on port {}".format(port_number))
 
         if not silent:
-            console.info("Starting Tornado HTTPS Server on port {}".format(port_number))
-            console.info("https://{}:{} is up and ready for connection:".format(helper.get_local_ip(), port_number))
+            console.info("Starting Tornado HTTP Server on port {}".format(port_number))
+            console.info("http://{}:{} is up and ready for connection:".format(helper.get_local_ip(), port_number))
 
         asyncio.set_event_loop(asyncio.new_event_loop())
 
@@ -162,7 +162,7 @@ class webserver():
             default_handler_class=My404Handler
         )
 
-        self.http_server = tornado.httpserver.HTTPServer(app, ssl_options=cert_objects)
+        self.http_server = tornado.httpserver.HTTPServer(app)
         self.http_server.listen(port_number)
         tornado.locale.load_translations(os.path.join(web_root, 'translations'))
         self.ioloop = tornado.ioloop.IOLoop.instance()
