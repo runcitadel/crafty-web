@@ -1,4 +1,4 @@
-FROM openjdk:19-bullseye
+FROM openjdk:17-bullseye
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
